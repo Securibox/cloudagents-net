@@ -7,8 +7,8 @@
     <ProjectGuid>{556CEF55-8740-426C-8881-F1D9E3855A22}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>cloudagents_csharp.cloudagents</RootNamespace>
-    <AssemblyName>cloudagents-csharp.cloudagents</AssemblyName>
+    <RootNamespace>Securibox.CloudAgents.SDK</RootNamespace>
+    <AssemblyName>Securibox.CloudAgents.SDK</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -59,42 +59,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="api\documents\Accounts.cs" />
-    <Compile Include="api\documents\Agents.cs" />
-    <Compile Include="api\documents\Categories.cs" />
-    <Compile Include="api\documents\Documents.cs" />
-    <Compile Include="api\documents\models\Account.cs" />
-    <Compile Include="api\documents\models\Agent.cs" />
-    <Compile Include="api\documents\models\AgentCountryCode.cs" />
-    <Compile Include="api\documents\models\AgentCurrentState.cs" />
-    <Compile Include="api\documents\models\AgentLogo.cs" />
-    <Compile Include="api\documents\models\AgentLogos.cs" />
-    <Compile Include="api\documents\models\AgentPeriodicity.cs" />
-    <Compile Include="api\documents\models\Category.cs" />
-    <Compile Include="api\documents\models\Credential.cs" />
-    <Compile Include="api\documents\models\Document.cs" />
-    <Compile Include="api\documents\models\DocumentProcessPhase.cs.cs" />
-    <Compile Include="api\documents\models\Field.cs" />
-    <Compile Include="api\documents\models\FieldInputType.cs" />
-    <Compile Include="api\documents\models\FieldValueType.cs" />
-    <Compile Include="api\documents\models\Synchronization.cs" />
-    <Compile Include="api\documents\models\SynchronizationMode.cs" />
-    <Compile Include="api\documents\models\SynchronizationRequest.cs" />
-    <Compile Include="api\documents\models\SynchronizationState.cs" />
-    <Compile Include="api\documents\models\SynchronizationStateDetails.cs" />
-    <Compile Include="api\documents\Synchronizations.cs" />
-    <Compile Include="core\ApiClient.cs" />
-    <Compile Include="core\ApiClientHttpException.cs" />
-    <Compile Include="core\ApiResponse.cs" />
-    <Compile Include="core\AuthClient.cs" />
-    <Compile Include="core\AuthClientConfig.cs" />
-    <Compile Include="core\AuthClientConfiguration.cs" />
-    <Compile Include="core\authconfigs\BasicAuthConfig.cs" />
-    <Compile Include="core\authconfigs\CertAuthConfig.cs" />
-    <Compile Include="core\authconfigs\JWTAuthConfig.cs" />
-    <Compile Include="core\IApiResponse.cs" />
-    <Compile Include="core\ErrorResponse.cs" />
-    <Compile Include="core\Utils.cs" />
+    <Compile Include="Api\Documents\Accounts.cs" />
+    <Compile Include="Api\Documents\Agents.cs" />
+    <Compile Include="Api\Documents\Categories.cs" />
+    <Compile Include="Api\Documents\Documents.cs" />
+    <Compile Include="Api\Documents\Models\Account.cs" />
+    <Compile Include="Api\Documents\Models\Agent.cs" />
+    <Compile Include="Api\Documents\Models\AgentCountryCode.cs" />
+    <Compile Include="Api\Documents\Models\AgentCurrentState.cs" />
+    <Compile Include="Api\Documents\Models\AgentLogo.cs" />
+    <Compile Include="Api\Documents\Models\AgentLogos.cs" />
+    <Compile Include="Api\Documents\Models\AgentPeriodicity.cs" />
+    <Compile Include="Api\Documents\Models\Category.cs" />
+    <Compile Include="Api\Documents\Models\Credential.cs" />
+    <Compile Include="Api\Documents\Models\Document.cs" />
+    <Compile Include="Api\Documents\Models\DocumentProcessPhase.cs.cs" />
+    <Compile Include="Api\Documents\Models\Field.cs" />
+    <Compile Include="Api\Documents\Models\FieldInputType.cs" />
+    <Compile Include="Api\Documents\Models\FieldValueType.cs" />
+    <Compile Include="Api\Documents\Models\Synchronization.cs" />
+    <Compile Include="Api\Documents\Models\SynchronizationMode.cs" />
+    <Compile Include="Api\Documents\Models\SynchronizationRequest.cs" />
+    <Compile Include="Api\Documents\Models\SynchronizationState.cs" />
+    <Compile Include="Api\Documents\Models\SynchronizationStateDetails.cs" />
+    <Compile Include="Api\Documents\Synchronizations.cs" />
+    <Compile Include="Core\ApiClient.cs" />
+    <Compile Include="Core\ApiClientHttpException.cs" />
+    <Compile Include="Core\ApiResponse.cs" />
+    <Compile Include="Core\AuthClient.cs" />
+    <Compile Include="Core\AuthClientConfig.cs" />
+    <Compile Include="Core\AuthClientConfiguration.cs" />
+    <Compile Include="Core\AuthConfigs\BasicAuthConfig.cs" />
+    <Compile Include="Core\AuthConfigs\CertAuthConfig.cs" />
+    <Compile Include="Core\AuthConfigs\JWTAuthConfig.cs" />
+    <Compile Include="Core\IApiResponse.cs" />
+    <Compile Include="Core\ErrorResponse.cs" />
+    <Compile Include="Core\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

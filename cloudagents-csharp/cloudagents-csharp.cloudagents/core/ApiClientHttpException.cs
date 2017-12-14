@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace cloudagents_csharp.cloudagents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     public class ApiClientHttpException : HttpException
     {

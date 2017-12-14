@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudagents.core.authconfigs
+namespace Securibox.CloudAgents.SDK.Core.AuthConfigs
 {
     public sealed class JWTAuthConfig : AuthClientConfig
     {

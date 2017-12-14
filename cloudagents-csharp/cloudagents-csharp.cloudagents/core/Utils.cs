@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Web;
 using Microsoft.IdentityModel.Tokens;
 
-namespace cloudagents_csharp.cloudagents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     public static class Utils
     {

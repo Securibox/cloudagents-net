@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudagents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     public class ErrorResponse
     {

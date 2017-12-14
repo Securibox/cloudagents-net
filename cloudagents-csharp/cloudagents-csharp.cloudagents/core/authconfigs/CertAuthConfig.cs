@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
-using cloudagents_csharp.cloudAgents.core;
+using Securibox.CloudAgents.SDK.Core;
 
-namespace cloudagents_csharp.cloudagents.core.authconfigs
+namespace Securibox.CloudAgents.SDK.Core.AuthConfigs
 {
     public sealed class CertAuthConfig : AuthClientConfig
     {

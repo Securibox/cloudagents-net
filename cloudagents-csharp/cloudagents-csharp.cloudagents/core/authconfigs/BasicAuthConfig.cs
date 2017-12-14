@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudagents.core.authconfigs
+namespace Securibox.CloudAgents.SDK.Core.AuthConfigs
 {
     /// <summary>
     /// BasicAuthConfig class.

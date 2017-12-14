@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudagents.api.documents.models
+namespace Securibox.CloudAgents.SDK.Api.Documents.Models
 {
     /// <summary>
     /// FieldValueType enumeration.

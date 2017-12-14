@@ -6,8 +6,8 @@
     <ProjectGuid>{07719FDF-81AE-46EB-8DA3-6F87540FA6F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>cloudagents_csharp.tests</RootNamespace>
-    <AssemblyName>cloudagents-csharp.tests</AssemblyName>
+    <RootNamespace>Securibox.CloudAgents.Test</RootNamespace>
+    <AssemblyName>Securibox.CloudAgents.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -57,9 +57,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cloudagents-csharp.cloudagents\cloudagents-csharp.cloudagents.csproj">
+    <ProjectReference Include="..\cloudagents-csharp.cloudagents\Securibox.CloudAgents.SDK.csproj">
       <Project>{556CEF55-8740-426C-8881-F1D9E3855A22}</Project>
-      <Name>cloudagents-csharp.cloudagents</Name>
+      <Name>Securibox.CloudAgents.SDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

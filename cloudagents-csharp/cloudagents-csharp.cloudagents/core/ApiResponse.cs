@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudAgents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     public class ApiResponse : IApiResponse
     {

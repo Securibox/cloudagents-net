@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace cloudagents_csharp.cloudagents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     /// <summary>
     /// AuthClientConfiguration class.

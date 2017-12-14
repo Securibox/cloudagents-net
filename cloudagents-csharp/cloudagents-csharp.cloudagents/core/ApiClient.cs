@@ -1,4 +1,4 @@
-﻿using cloudagents_csharp.cloudAgents.core;
+﻿using Securibox.CloudAgents.SDK.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudagents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     public class ApiClient : AuthClient
     {

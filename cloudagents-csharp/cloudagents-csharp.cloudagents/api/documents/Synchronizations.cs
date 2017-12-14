@@ -1,12 +1,12 @@
-﻿using cloudagents_csharp.cloudagents.api.documents.models;
-using cloudagents_csharp.cloudagents.core;
+﻿using Securibox.CloudAgents.SDK.Api.Documents.Models;
+using Securibox.CloudAgents.SDK.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.cloudagents.api.documents
+namespace Securibox.CloudAgents.SDK.Api.Documents
 {
     public class Synchronizations : ApiClient
     {

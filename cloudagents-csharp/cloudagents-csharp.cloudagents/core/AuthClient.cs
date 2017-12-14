@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using cloudagents_csharp.cloudagents.core.authconfigs;
+using Securibox.CloudAgents.SDK.Core.AuthConfigs;
 
-namespace cloudagents_csharp.cloudagents.core
+namespace Securibox.CloudAgents.SDK.Core
 {
     public abstract class AuthClient : IDisposable
     {
