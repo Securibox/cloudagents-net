@@ -81,6 +81,7 @@ namespace cloudagents_csharp.cloudagents.api.documents
 
             var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}", ApiVersion, _path));
             var apiAccountRequest = new CreateAccountRequest(apiAccount, synchronize);
+
             var response = ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(apiAccountRequest));
             return response.GetObjectFromResponse<Account>();
         }
@@ -110,7 +111,7 @@ namespace cloudagents_csharp.cloudagents.api.documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}{1}/{2}", ApiVersion, _path, customerAccountId));
+            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}", ApiVersion, _path, customerAccountId));
             ApiDelete(requestUri);
         }
         /// <summary>
@@ -210,14 +211,14 @@ namespace cloudagents_csharp.cloudagents.api.documents
             /// <value>
             ///   <c>true</c> if synchronize; otherwise, <c>false</c>.
             /// </value>
-            private bool Synchronize { get; set; }
+            public bool Synchronize { get; set; }
             /// <summary>
             /// Gets or sets the account.
             /// </summary>
             /// <value>
             /// The account.
             /// </value>
-            private Account Account { get; set; }
+            public Account Account { get; set; }
 
             public CreateAccountRequest(Account account, bool synchronize)
             {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cloudagents_csharp.CloudAgents.Api.Documents
+namespace cloudagents_csharp.cloudagents.api.documents
 {
     public class Categories : ApiClient
     {
