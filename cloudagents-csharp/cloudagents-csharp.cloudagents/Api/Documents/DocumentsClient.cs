@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Api.Documents
 {
-    public class Documents : ApiClient
+    public class DocumentsClient : ApiClient
     {
         private readonly string _path = "documents";
-        public Documents()
+        public DocumentsClient()
             : base("v1")
         { }
 

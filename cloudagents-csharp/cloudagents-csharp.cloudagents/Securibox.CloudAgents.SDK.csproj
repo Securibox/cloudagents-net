@@ -59,10 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Documents\Accounts.cs" />
-    <Compile Include="Api\Documents\Agents.cs" />
-    <Compile Include="Api\Documents\Categories.cs" />
-    <Compile Include="Api\Documents\Documents.cs" />
+    <Compile Include="Api\Documents\AccountsClient.cs" />
+    <Compile Include="Api\Documents\AgentsClient.cs" />
+    <Compile Include="Api\Documents\CategoriesClient.cs" />
+    <Compile Include="Api\Documents\DocumentsClient.cs" />
     <Compile Include="Api\Documents\Models\Account.cs" />
     <Compile Include="Api\Documents\Models\Agent.cs" />
     <Compile Include="Api\Documents\Models\AgentCountryCode.cs" />
@@ -82,7 +82,7 @@
     <Compile Include="Api\Documents\Models\SynchronizationRequest.cs" />
     <Compile Include="Api\Documents\Models\SynchronizationState.cs" />
     <Compile Include="Api\Documents\Models\SynchronizationStateDetails.cs" />
-    <Compile Include="Api\Documents\Synchronizations.cs" />
+    <Compile Include="Api\Documents\SynchronizationsClient.cs" />
     <Compile Include="Core\ApiClient.cs" />
     <Compile Include="Core\ApiClientHttpException.cs" />
     <Compile Include="Core\ApiResponse.cs" />

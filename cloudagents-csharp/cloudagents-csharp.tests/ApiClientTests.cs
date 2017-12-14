@@ -12,7 +12,7 @@ namespace cloudagents_csharp.tests
         [TestMethod]
         public void GetAgentsListTest()
         {
-            using (var agentsClient = new Agents())
+            using (var agentsClient = new AgentsClient())
             {
                 var agents = agentsClient.ListAgents();
                 Assert.IsTrue(agents != null && agents.Count > 0);
@@ -22,7 +22,7 @@ namespace cloudagents_csharp.tests
         [TestMethod]
         public void SearchAgentsTest()
         {
-            using (var agentsClient = new Agents())
+            using (var agentsClient = new AgentsClient())
             {
                 var agents = agentsClient.SearchAgent(AgentCountryCode.FR);
                 Assert.IsTrue(agents != null && agents.Count > 0);
@@ -38,7 +38,7 @@ namespace cloudagents_csharp.tests
         [TestMethod]
         public void GetCategoriesListTest()
         {
-            using (var categoriesClient = new Categories())
+            using (var categoriesClient = new CategoriesClient())
             {
                 var categories = categoriesClient.ListCategories();
                 Assert.IsTrue(categories != null && categories.Count > 0);
@@ -48,7 +48,7 @@ namespace cloudagents_csharp.tests
         [TestMethod]
         public void GetCategoriesAndListAgentsByCategoryTest()
         {
-            using (var categoriesClient = new Categories())
+            using (var categoriesClient = new CategoriesClient())
             {
                 var categories = categoriesClient.ListCategories();
                 Assert.IsTrue(categories != null && categories.Count > 0);
@@ -63,7 +63,7 @@ namespace cloudagents_csharp.tests
         [TestMethod]
         public void CreateAccountAndSynchronizeTest()
         {
-            using (var accountsClient = new Accounts())
+            using (var accountsClient = new AccountsClient())
             {
                 var credentials = new List<Credential>
                 {
@@ -89,7 +89,7 @@ namespace cloudagents_csharp.tests
         [TestMethod]
         public void DeleteAccountTest()
         {
-            var accountsClient = new Accounts();
+            var accountsClient = new AccountsClient();
             accountsClient.DeleteAccount("CloudAgent_CSharp_EvianChezVous");
 
         }
