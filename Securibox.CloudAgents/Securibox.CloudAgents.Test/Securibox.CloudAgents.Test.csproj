@@ -57,7 +57,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\cloudagents-csharp.cloudagents\Securibox.CloudAgents.SDK.csproj">
+    <ProjectReference Include="..\Securibox.CloudAgents.SDK\Securibox.CloudAgents.SDK.csproj">
       <Project>{556CEF55-8740-426C-8881-F1D9E3855A22}</Project>
       <Name>Securibox.CloudAgents.SDK</Name>
     </ProjectReference>
