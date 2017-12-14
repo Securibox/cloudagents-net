@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Api\Documents\AccountsClient.cs" />
     <Compile Include="Api\Documents\AgentsClient.cs" />
+    <Compile Include="Api\Documents\ApiClient.cs" />
     <Compile Include="Api\Documents\CategoriesClient.cs" />
     <Compile Include="Api\Documents\DocumentsClient.cs" />
     <Compile Include="Api\Documents\Models\Account.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Api\Documents\Models\SynchronizationState.cs" />
     <Compile Include="Api\Documents\Models\SynchronizationStateDetails.cs" />
     <Compile Include="Api\Documents\SynchronizationsClient.cs" />
-    <Compile Include="Core\ApiClient.cs" />
+    <Compile Include="Core\Client.cs" />
     <Compile Include="Core\ApiClientHttpException.cs" />
     <Compile Include="Core\ApiResponse.cs" />
     <Compile Include="Core\AuthClient.cs" />

@@ -8,12 +8,21 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Api.Documents
 {
-    public class AccountsClient : ApiClient
+    public class AccountsClient
     {
         private readonly string _path = "accounts";
-        public AccountsClient()
-            : base("v1")
-        { }
+        private readonly string _apiVersion = "v1";
+
+        private Client _client;
+        protected Client Client
+        {
+            get
+            {
+                if (_client == null)
+                    _client = ApiClient.GetClient();
+                return _client;
+            }
+        }
 
         #region ACCOUNT Methods
         /// <summary>
@@ -26,8 +35,8 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}", ApiVersion, _path, customerAccountId));
-            var response = ApiGet(requestUri);
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}", _apiVersion, _path, customerAccountId));
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<Account>();
         }
         /// <summary>
@@ -38,7 +47,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public List<Account> ListAccounts(string agentId = null, string customerUserId = null, int skip = 0, int take = 0)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}", ApiVersion, _path));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}", _apiVersion, _path));
             requestUri = requestUri.AddQueryParameter("agentId", agentId);
             requestUri = requestUri.AddQueryParameter("customerUserId", customerUserId);
             requestUri = requestUri.AddQueryParameter("skip", skip);
@@ -46,7 +55,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             {
                 requestUri = requestUri.AddQueryParameter("take", take);
             }
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Account>>();
         }
         /// <summary>
@@ -57,7 +66,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public List<Account> SearchAccounts(string agentId = null, string customerUserId = null, int skip = 0, int take = 0)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/search", ApiVersion, _path, customerUserId));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/search", _apiVersion, _path, customerUserId));
 
             requestUri = requestUri.AddQueryParameter("agentId", agentId);
             requestUri = requestUri.AddQueryParameter("customerUserId", customerUserId);
@@ -66,7 +75,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             {
                 requestUri = requestUri.AddQueryParameter("take", take);
             }
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Account>>();
         }
         /// <summary>
@@ -79,10 +88,10 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (apiAccount == null)
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "ApiAccount payload missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}", ApiVersion, _path));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}", _apiVersion, _path));
             var apiAccountRequest = new CreateAccountRequest(apiAccount, synchronize);
 
-            var response = ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(apiAccountRequest));
+            var response = Client.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(apiAccountRequest));
             return response.GetObjectFromResponse<Account>();
         }
         /// <summary>
@@ -99,8 +108,8 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}", ApiVersion, _path, customerAccountId));
-            var response = ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(apiAccount));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}", _apiVersion, _path, customerAccountId));
+            var response = Client.ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(apiAccount));
             return response.GetObjectFromResponse<Account>();
         }
         /// Deletes the account.
@@ -111,8 +120,8 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}", ApiVersion, _path, customerAccountId));
-            ApiDelete(requestUri);
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}", _apiVersion, _path, customerAccountId));
+            Client.ApiDelete(requestUri);
         }
         /// <summary>
         /// Lists the documents.
@@ -126,11 +135,11 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/documents", ApiVersion, _path, customerAccountId));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/documents", _apiVersion, _path, customerAccountId));
             requestUri = requestUri.AddQueryParameter("pendingOnly", pendingOnly);
             requestUri = requestUri.AddQueryParameter("includeContent", includeContent);
 
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Document>>();
         }
         /// <summary>
@@ -145,7 +154,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/synchronizations", ApiVersion, _path, customerAccountId));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/synchronizations", _apiVersion, _path, customerAccountId));
 
             string startDateString = null;
             string endDateString = null;
@@ -163,7 +172,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             requestUri = requestUri.AddQueryParameter("startDate", startDateString);
             requestUri = requestUri.AddQueryParameter("endDate", endDateString);
 
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Synchronization>>();
         }
         /// <summary>
@@ -176,8 +185,8 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/synchronizations/last", ApiVersion, _path, customerAccountId));
-            var response = ApiGet(requestUri);
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/synchronizations/last", _apiVersion, _path, customerAccountId));
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<Synchronization>();
         }
 
@@ -192,9 +201,9 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(customerAccountId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/synchronizations", ApiVersion, _path, customerAccountId));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/synchronizations", _apiVersion, _path, customerAccountId));
             var synchRequest = new SynchronizationRequest(customerAccountId, isForced);
-            var response = ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchRequest));
+            var response = Client.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchRequest));
             return response.GetObjectFromResponse<Synchronization>();
         }
         #endregion

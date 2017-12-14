@@ -32,7 +32,7 @@ namespace Securibox.CloudAgents.SDK.Core
         /// The _base URI
         /// </summary>
         private Uri _baseUri;
-        protected Uri BaseUri
+        public Uri BaseUri
         {
             get
             {

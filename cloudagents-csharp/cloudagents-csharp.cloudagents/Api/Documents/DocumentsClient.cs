@@ -8,12 +8,21 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Api.Documents
 {
-    public class DocumentsClient : ApiClient
+    public class DocumentsClient
     {
         private readonly string _path = "documents";
-        public DocumentsClient()
-            : base("v1")
-        { }
+        private readonly string _apiVersion = "v1";
+
+        private Client _client;
+        protected Client Client
+        {
+            get
+            {
+                if (_client == null)
+                    _client = ApiClient.GetClient();
+                return _client;
+            }
+        }
 
         #region DOCUMENTS
         /// <summary>
@@ -26,14 +35,14 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public List<Document> SearchDocuments(string customerAccountId = null, string customerUserId = null, bool pendingOnly = false, bool includeContent = false)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/search", ApiVersion, _path));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/search", _apiVersion, _path));
 
             requestUri = requestUri.AddQueryParameter("customerAccountId", customerAccountId);
             requestUri = requestUri.AddQueryParameter("customerUserId", customerUserId);
             requestUri = requestUri.AddQueryParameter("pendingOnly", pendingOnly);
             requestUri = requestUri.AddQueryParameter("includeContent", includeContent);
 
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Document>>();
         }
         /// <summary>
@@ -43,10 +52,10 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public Document GetDocument(int id, bool includeContent = true)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}", ApiVersion, _path, id));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}", _apiVersion, _path, id));
             requestUri = requestUri.AddQueryParameter("includeContent", includeContent);
 
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<Document>();
 
         }
@@ -56,8 +65,8 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <param name="id">The identifier.</param>
         public bool AcknowledgeDocumentDelivery(int id)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/ack", ApiVersion, _path, id));
-            var response = ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(id));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/ack", _apiVersion, _path, id));
+            var response = Client.ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(id));
             return response.GetObjectFromResponse<bool>();
         }
         #endregion

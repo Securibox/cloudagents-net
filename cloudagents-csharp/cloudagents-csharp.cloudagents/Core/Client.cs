@@ -1,4 +1,5 @@
-﻿using Securibox.CloudAgents.SDK.Core;
+﻿using Securibox.CloudAgents.SDK.Api.Documents;
+using Securibox.CloudAgents.SDK.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,35 +9,14 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Core
 {
-    public class ApiClient : AuthClient
+    public class Client : AuthClient
     {
-        private string _apiVersion;
-
-        protected string ApiVersion
-        {
-            get
-            {
-                return _apiVersion;
-            }
-        }
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient"/> class.
         /// </summary>
-        public ApiClient() : base() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiClient"/> class.
-        /// </summary>
-        /// <param name="apiVersion">The API version.</param>
-        public ApiClient(string apiVersion)
-            : base()
-        {
-            _apiVersion = apiVersion;
-        }
+        public Client() : base() { }
 
-        internal void SetApiVersion(string apiVersion)
-        {
-            this._apiVersion = apiVersion;
-        }
+        #region Protected Methods
 
         internal ApiResponse ApiGet(string requestUri)
         {
@@ -71,7 +51,9 @@ namespace Securibox.CloudAgents.SDK.Core
             {
                 using (HttpResponseMessage response = HttpClient.PostAsync(requestUri, content).Result)
                 {
-                    return new ApiResponse(response);
+                    if (response.IsSuccessStatusCode)
+                        return new ApiResponse(response);
+                    throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
                 }
             }
         }
@@ -85,7 +67,9 @@ namespace Securibox.CloudAgents.SDK.Core
             {
                 using (HttpResponseMessage response = HttpClient.PostAsync(requestUri, content).Result)
                 {
-                    return new ApiResponse(response);
+                    if (response.IsSuccessStatusCode)
+                        return new ApiResponse(response);
+                    throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
                 }
             }
         }
@@ -99,7 +83,9 @@ namespace Securibox.CloudAgents.SDK.Core
             {
                 using (HttpResponseMessage response = HttpClient.PutAsync(requestUri, content).Result)
                 {
-                    return new ApiResponse(response);
+                    if (response.IsSuccessStatusCode)
+                        return new ApiResponse(response);
+                    throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
                 }
             }
         }
@@ -113,7 +99,9 @@ namespace Securibox.CloudAgents.SDK.Core
             {
                 using (HttpResponseMessage response = HttpClient.PutAsync(requestUri, content).Result)
                 {
-                    return new ApiResponse(response);
+                    if (response.IsSuccessStatusCode)
+                        return new ApiResponse(response);
+                    throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
                 }
             }
         }
@@ -125,7 +113,9 @@ namespace Securibox.CloudAgents.SDK.Core
 
             using (HttpResponseMessage response = HttpClient.DeleteAsync(requestUri).Result)
             {
-                return new ApiResponse(response);
+                if (response.IsSuccessStatusCode)
+                    return new ApiResponse(response);
+                throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
 
@@ -136,9 +126,38 @@ namespace Securibox.CloudAgents.SDK.Core
 
             using (HttpResponseMessage response = HttpClient.DeleteAsync(requestUri).Result)
             {
-                return new ApiResponse(response);
+                if (response.IsSuccessStatusCode)
+                    return new ApiResponse(response);
+                throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
+        #endregion
 
+        #region Public Methods
+        public AccountsClient GetAccountsClient()
+        {
+            return new AccountsClient();
+        }
+
+        public AgentsClient GetAgentsClient()
+        {
+            return new AgentsClient();
+        }
+
+        public CategoriesClient GetCategoriesClient()
+        {
+            return new CategoriesClient();
+        }
+
+        public DocumentsClient GetDocumentsClient()
+        {
+            return new DocumentsClient();
+        }
+
+        public SynchronizationsClient GetSynchronizationsClient()
+        {
+            return new SynchronizationsClient();
+        }
+        #endregion
     }
 }

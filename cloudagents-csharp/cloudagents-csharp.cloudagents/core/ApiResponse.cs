@@ -23,12 +23,7 @@ namespace Securibox.CloudAgents.SDK.Core
         {
             if (response == null)
                 throw new ArgumentNullException("response", "Response is missing.");
-
-            if (!response.IsSuccessStatusCode)
-            {
-                //throw exception
-            }
-
+            
             this._bodyContent = response.Content.ReadAsStringAsync().Result;
             this._responseMessage = response.ReasonPhrase;
             this._statusCode = response.StatusCode;

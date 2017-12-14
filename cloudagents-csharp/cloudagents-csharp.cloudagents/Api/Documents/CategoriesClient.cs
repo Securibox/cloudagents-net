@@ -8,12 +8,21 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Api.Documents
 {
-    public class CategoriesClient : ApiClient
+    public class CategoriesClient
     {
         private readonly string _path = "categories";
-        public CategoriesClient()
-            : base("v1")
-        { }
+        private readonly string _apiVersion = "v1";
+
+        private Client _client;
+        protected Client Client
+        {
+            get
+            {
+                if (_client == null)
+                    _client = ApiClient.GetClient();
+                return _client;
+            }
+        }
 
         #region CATEGORIES Methods
         /// <summary>
@@ -22,10 +31,10 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public List<Category> ListCategories(string culture = null)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}", ApiVersion, _path));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}", _apiVersion, _path));
             requestUri = requestUri.AddQueryParameter("culture", culture);
 
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Category>>();
         }
         /// <summary>
@@ -38,8 +47,8 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             if (string.IsNullOrEmpty(categoryId))
                 throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CategoryId missing.");
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/agents", ApiVersion, _path, categoryId));
-            var response = ApiGet(requestUri);
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/agents", _apiVersion, _path, categoryId));
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Agent>>();
         }
         #endregion

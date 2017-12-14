@@ -8,12 +8,21 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Api.Documents
 {
-    public class SynchronizationsClient : ApiClient
+    public class SynchronizationsClient
     {
         private readonly string _path = "synchronizations";
-        public SynchronizationsClient()
-            : base("v1")
-        { }
+        private readonly string _apiVersion = "v1";
+
+        private Client _client;
+        protected Client Client
+        {
+            get
+            {
+                if (_client == null)
+                    _client = ApiClient.GetClient();
+                return _client;
+            }
+        }
 
         #region SYNCHRONIZATIONS Methods
         /// <summary>
@@ -23,10 +32,10 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public List<Synchronization> CreateSynchronizations(string customerAccountId, string customerUserId, bool isForced)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}", ApiVersion, _path));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}", _apiVersion, _path));
 
             var synchRequest = new SynchronizationRequest(customerAccountId, isForced, customerUserId);
-            var response = ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchRequest));
+            var response = Client.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchRequest));
 
             return response.GetObjectFromResponse<List<Synchronization>>();
         }
@@ -41,7 +50,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
         /// <returns></returns>
         public List<Synchronization> SearchSynchronizations(string customerAccountId = null, string customerUserId = null, DateTime? startDate = null, DateTime? endDate = null)
         {
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/search", ApiVersion, _path));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/search", _apiVersion, _path));
 
             string startDateString = null;
             string endDateString = null;
@@ -57,7 +66,7 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
             requestUri = requestUri.AddQueryParameter("customerAccountId", customerAccountId);
             requestUri = requestUri.AddQueryParameter("customerUserId", customerUserId);
 
-            var response = ApiGet(requestUri);
+            var response = Client.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Synchronization>>();
         }
         /// <summary>
@@ -85,9 +94,9 @@ namespace Securibox.CloudAgents.SDK.Api.Documents
 
             var synchronizationAcknowledment = new SynchronizationAcknowledgement(customerAccountId, documentIds, missingDocumentIds);
 
-            var requestUri = new Uri(BaseUri, string.Format("api/{0}/{1}/{2}/ack", ApiVersion, _path, customerAccountId));
+            var requestUri = new Uri(Client.BaseUri, string.Format("api/{0}/{1}/{2}/ack", _apiVersion, _path, customerAccountId));
 
-            var response = ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchronizationAcknowledment));
+            var response = Client.ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchronizationAcknowledment));
             return response.GetObjectFromResponse<bool>();
         }
         #endregion
