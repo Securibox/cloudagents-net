@@ -16,7 +16,7 @@ namespace Securibox.CloudAgents.SDK.Core
         /// </summary>
         public Client() : base() { }
 
-        #region Protected Methods
+        #region Internal Methods
 
         internal ApiResponse ApiGet(string requestUri)
         {
@@ -25,7 +25,9 @@ namespace Securibox.CloudAgents.SDK.Core
 
             using (HttpResponseMessage response = HttpClient.GetAsync(requestUri).Result)
             {
-                return new ApiResponse(response);
+                if (response.IsSuccessStatusCode)
+                    return new ApiResponse(response);
+                throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }
 
