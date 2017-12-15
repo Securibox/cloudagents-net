@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Securibox.CloudAgents.SDK.Api.Documents;
 using System.Collections.Generic;
 using Securibox.CloudAgents.SDK.Api.Documents.Models;
-using Securibox.CloudAgents.SDK.Core;
 
 namespace cloudagents_csharp.tests
 {

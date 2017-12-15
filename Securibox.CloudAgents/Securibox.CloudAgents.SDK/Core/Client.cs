@@ -1,11 +1,7 @@
 ﻿using Securibox.CloudAgents.SDK.Api.Documents;
-using Securibox.CloudAgents.SDK.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.SDK.Core
 {
