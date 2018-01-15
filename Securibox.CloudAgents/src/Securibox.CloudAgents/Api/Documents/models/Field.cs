@@ -1,58 +1,37 @@
 ﻿namespace Securibox.CloudAgents.Api.Documents.Models
 {
     /// <summary>
-    /// Field class.
+    /// A class representing an agent login field.
     /// </summary>
     public class Field
     {
         /// <summary>
-        /// Gets or sets the name.
+        /// The field name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
         public string Name { get; set; }
         /// <summary>
-        /// Gets or sets the position.
+        /// The field position.
         /// </summary>
-        /// <value>
-        /// The position.
-        /// </value>
         public int Position { get; set; }
         /// <summary>
-        /// Gets or sets the hint.
+        /// The field hint.
         /// </summary>
-        /// <value>
-        /// The hint.
-        /// </value>
         public string Hint { get; set; }
         /// <summary>
-        /// Gets or sets the place holder.
+        /// The field place holder.
         /// </summary>
-        /// <value>
-        /// The place holder.
-        /// </value>
         public string PlaceHolder { get; set; }
         /// <summary>
-        /// Gets or sets the regex.
+        /// The regex that can be used to validate the field value.
         /// </summary>
-        /// <value>
-        /// The regex.
-        /// </value>
         public string Regex { get; set; }
         /// <summary>
-        /// Gets or sets the type of the field input.
+        /// The type of input that can be used to display the field.
         /// </summary>
-        /// <value>
-        /// The type of the field input.
-        /// </value>
         public FieldInputType FieldInputType { get; set; }
         /// <summary>
-        /// Gets or sets the type of the field value.
+        /// The type of the value that this field should hold.
         /// </summary>
-        /// <value>
-        /// The type of the field value.
-        /// </value>
         public FieldValueType FieldValueType { get; set; }
     }
 }

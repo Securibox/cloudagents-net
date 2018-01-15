@@ -5,11 +5,17 @@ using System.Collections.Generic;
 
 namespace Securibox.CloudAgents.Api.Documents
 {
+    /// <summary>
+    /// Wrapper for the Categories related methods.
+    /// </summary>
     public class CategoriesClient : ApiObjectClient
     {
         private readonly string _path = "categories";
         private readonly string _apiVersion = "v1";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CategoriesClient"/> class.
+        /// </summary>
+        /// <param name="authenticatedClient">An authentication client</param>
         public CategoriesClient(AuthClient authenticatedClient):base(authenticatedClient)
         {
         }
@@ -17,9 +23,10 @@ namespace Securibox.CloudAgents.Api.Documents
 
         #region CATEGORIES Methods
         /// <summary>
-        /// Lists the categories.
+        /// Lists the agents categories.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="culture">The culture of the returned information.</param>
+        /// <returns>A list of agent categories.</returns>
         public List<Category> ListCategories(string culture = null)
         {
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}", _apiVersion, _path));
@@ -29,10 +36,10 @@ namespace Securibox.CloudAgents.Api.Documents
             return response.GetObjectFromResponse<List<Category>>();
         }
         /// <summary>
-        /// Lists the agents by category.
+        /// Lists the agents by categories.
         /// </summary>
-        /// <param name="categoryId">The identifier.</param>
-        /// <returns></returns>
+        /// <param name="categoryId">The category identifier</param>
+        /// <returns>A list of agents.</returns>
         public List<Agent> ListAgentsByCategory(string categoryId)
         {
             if (string.IsNullOrEmpty(categoryId))

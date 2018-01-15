@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Web;
-using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens;
 
 namespace Securibox.CloudAgents.Core
 {
+    /// <summary>
+    /// Utils class
+    /// </summary>
     public static class Utils
     {
+        /// <summary>
+        /// Loads a certificate from the certificate stores by its thumbprint.
+        /// </summary>
+        /// <param name="certThumbprint"></param>
+        /// <returns></returns>
         public static X509Certificate2 GetCertificate(string certThumbprint)
         {
             X509Store store = new X509Store("My", StoreLocation.CurrentUser);
@@ -29,6 +36,11 @@ namespace Securibox.CloudAgents.Core
             return x509Certificates[0];
         }
 
+        /// <summary>
+        /// Builds a Json Web Token from the certificate.
+        /// </summary>
+        /// <param name="x509Certificate2">The certificate PFX</param>
+        /// <returns>A JSON Web Token</returns>
         public static JwtSecurityToken BuildDefaultToken(X509Certificate2 x509Certificate2)
         {
             var iss = x509Certificate2.Issuer;
@@ -41,14 +53,19 @@ namespace Securibox.CloudAgents.Core
             claims.Add(new Claim("sub", x509Certificate2.Subject));
             claims.Add(new Claim("jti", Guid.NewGuid().ToString("D")));
 
-            //X509SigningCredentials credentials = new X509SigningCredentials(x509Certificate2, SecurityAlgorithms.RsaSha256Signature, SecurityAlgorithms.Sha256Digest);
-            Microsoft.IdentityModel.Tokens.SigningCredentials credentials =
-                new Microsoft.IdentityModel.Tokens.SigningCredentials(new Microsoft.IdentityModel.Tokens.X509SecurityKey(x509Certificate2), SecurityAlgorithms.RsaSha256Signature);
+            X509SigningCredentials credentials = new X509SigningCredentials(x509Certificate2, SecurityAlgorithms.RsaSha256Signature, SecurityAlgorithms.Sha256Digest);
             var header = new JwtHeader(credentials);
             var payload = new JwtPayload(issuer: iss, audience: aud, claims: claims, notBefore: nbf, expires: exp);
             return new JwtSecurityToken(header, payload);
         }
 
+        /// <summary>
+        /// Adds a query parameter to the Uri
+        /// </summary>
+        /// <param name="url">The URI</param>
+        /// <param name="paramName">The query key</param>
+        /// <param name="paramValue">The query value</param>
+        /// <returns>The URI with the new query parameter</returns>
         public static Uri AddQueryParameter(this Uri url, string paramName, object paramValue)
         {
             if (paramValue != null)

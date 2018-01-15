@@ -6,16 +6,15 @@ using System.Text;
 namespace Securibox.CloudAgents.Core.AuthConfigs
 {
     /// <summary>
-    /// BasicAuthConfig class.
+    /// Class representing the basic authentication client.
     /// </summary>
     public sealed class BasicAuthConfig : AuthClientConfig
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BasicAuthConfig"/> class.
         /// </summary>
-        /// <param name="baseAddress">The base address.</param>
-        /// <param name="username">The username.</param>
-        /// <param name="password">The password.</param>
+        /// <param name="username">The basic username.</param>
+        /// <param name="password">The basic password.</param>
         public BasicAuthConfig(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))

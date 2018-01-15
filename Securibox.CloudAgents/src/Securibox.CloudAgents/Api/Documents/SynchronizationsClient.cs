@@ -5,20 +5,28 @@ using System.Collections.Generic;
 
 namespace Securibox.CloudAgents.Api.Documents
 {
+    /// <summary>
+    /// Wrapper for the Synchronizations related methods.
+    /// </summary>
     public class SynchronizationsClient : ApiObjectClient
     {
         private readonly string _path = "synchronizations";
         private readonly string _apiVersion = "v1";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SynchronizationsClient"/> class.
+        /// </summary>
+        /// <param name="authenticatedClient">An authentication client</param>
         public SynchronizationsClient(AuthClient authenticatedClient):base(authenticatedClient)
         {
         }
 
         #region SYNCHRONIZATIONS Methods
         /// <summary>
-        /// Creates the synchronizations.
+        /// Launches a new synchronizations to download documents.
         /// </summary>
-        /// <param name="synchronizeRequest">The synchronize.</param>
+        /// <param name="customerAccountId">The customer account identifier</param>
+        /// <param name="customerUserId">The customer user identifier</param>
+        /// <param name="isForced">If true, sets the synchronization as forced, thus overriding the document unicity check.</param>
         /// <returns></returns>
         public List<Synchronization> CreateSynchronizations(string customerAccountId, string customerUserId, bool isForced)
         {

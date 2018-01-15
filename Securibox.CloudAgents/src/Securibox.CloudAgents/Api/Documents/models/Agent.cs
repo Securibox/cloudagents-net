@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Securibox.CloudAgents.Api.Documents.Models
 {
     /// <summary>
-    /// Agent class.
+    /// Object representing an agent.
     /// </summary>
     public class Agent
     {
@@ -12,7 +12,7 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>
-        /// The identifier.
+        /// The agent identifier.
         /// </value>
         public string Id { get; set; }
         /// <summary>
@@ -23,49 +23,49 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// </value>
         public bool IsEnabled { get; set; }
         /// <summary>
-        /// Gets or sets the name.
+        /// Gets or sets the agent name. (maximum length of 256 chars)
         /// </summary>
         /// <value>
-        /// The name.
+        /// The agent name
         /// </value>
         public string Name { get; set; }
         /// <summary>
-        /// Gets or sets the display name.
+        /// The agent display name. (maximum length of 64 chars)
         /// </summary>
         /// <value>
-        /// The display name.
+        /// The agent display name
         /// </value>
         public string DisplayName { get; set; }
         /// <summary>
-        /// Gets or sets the description.
+        /// Gets or sets the agent description. (maximum length of 256 chars)
         /// </summary>
         /// <value>
-        /// The description.
+        /// The agent description
         /// </value>
         public string Description { get; set; }
         /// <summary>
-        /// The _periodicit private member
+        /// The agent periodicity
         /// </summary>
         /// <value>
-        /// The agent periodicity.
+        /// The agent periodicity
         /// </value>
         public AgentPeriodicity AgentPeriodicity { get; set; }
         /// <summary>
-        /// The _agentState private member
+        /// The agent current state
         /// </summary>
         /// <value>
-        /// The state of the agent current.
+        /// The agent current state
         /// </value>
         public AgentCurrentState AgentCurrentState { get; set; }
         /// <summary>
-        /// Gets or sets the default category.
+        /// Gets or sets the agent default category (that was initially specified by Securibox).
         /// </summary>
         /// <value>
-        /// The default category.
+        /// The agent default category
         /// </value>
         public string DefaultCategory { get; set; }
         /// <summary>
-        /// Gets or sets the category identifier.
+        /// Gets or sets the agent category identifier.
         /// </summary>
         /// <value>
         /// The category identifier.
@@ -79,52 +79,52 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// </value>
         public bool IsTracked { get; set; }
         /// <summary>
-        /// Gets or sets the logos.
+        /// Gets or sets the agent logos.
         /// </summary>
         /// <value>
-        /// The logos.
+        /// The agent logos
         /// </value>
         public AgentLogos Logos { get; set; }
         /// <summary>
-        /// Gets or sets the base64 logo.
+        /// Gets or sets the agent base64 encoded logo.
         /// </summary>
         /// <value>
-        /// The base64 logo.
+        /// The agent base64 encoded logo
         /// </value>
         public string Base64Logo { get; set; }
         /// <summary>
-        /// Gets or sets the country code.
+        /// Gets or sets the country codes.
         /// </summary>
         /// <value>
-        /// The country code.
+        /// The country codes
         /// </value>
         public AgentCountryCode[] CountryCodes { get; set; }
         /// <summary>
-        /// Gets or sets the URL.
+        /// Gets or sets the agent login URL.
         /// </summary>
         /// <value>
-        /// The URL.
+        /// The agent login URL
         /// </value>
         public string Url { get; set; }
         /// <summary>
-        /// Gets or sets the document types.
+        /// Gets or sets the document types returned by this agent.
         /// </summary>
         /// <value>
-        /// The document types.
+        /// The document types returned by this agent
         /// </value>
         public string DocumentTypes { get; set; }
         /// <summary>
-        /// Gets or sets the fields.
+        /// Gets or sets the fields that must be filled to perform the login.
         /// </summary>
         /// <value>
-        /// The fields.
+        /// The agent fields that must be filled to perform the login.
         /// </value>
         public List<Field> Fields { get; set; }
         /// <summary>
-        /// Gets or sets the category.
+        /// Gets or sets the agent category name.
         /// </summary>
         /// <value>
-        /// The category.
+        /// The agent category name
         /// </value>
         public string Category { get; set; }
 

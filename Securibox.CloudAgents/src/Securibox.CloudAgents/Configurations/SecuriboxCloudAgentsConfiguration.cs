@@ -4,12 +4,12 @@ using System.Configuration;
 namespace Securibox.CloudAgents.Configurations
 {
     /// <summary>
-    /// AuthClientConfiguration class.
+    /// Class representing the Cloud Agents configuration in the configuration file.
     /// </summary>
     public class SecuriboxCloudAgentsConfiguration : ConfigurationSection
     {
         /// <summary>
-        /// The section name
+        /// The configuration section name
         /// </summary>
         public static string SectionName
         {
@@ -43,11 +43,8 @@ namespace Securibox.CloudAgents.Configurations
             }
         }
         /// <summary>
-        /// Gets or sets the authentication mode.
+        /// Gets or sets the authentication mode (basic, cert or jwt).
         /// </summary>
-        /// <value>
-        /// The authentication mode.
-        /// </value>
         [ConfigurationProperty("authMode", DefaultValue = null, IsRequired = true)]
         public string AuthMode
         {
@@ -61,11 +58,8 @@ namespace Securibox.CloudAgents.Configurations
             }
         }
         /// <summary>
-        /// Gets or sets the base address.
+        /// Gets or sets the base address of the Cloud Agents platform.
         /// </summary>
-        /// <value>
-        /// The base address.
-        /// </value>
         [ConfigurationProperty("baseAddress", DefaultValue = null, IsRequired = true)]
         public string BaseAddress
         {
@@ -79,7 +73,7 @@ namespace Securibox.CloudAgents.Configurations
             }
         }
         /// <summary>
-        /// Gets or sets the username.
+        /// Gets or sets the basic username.
         /// </summary>
         /// <value>
         /// The username.
@@ -98,7 +92,7 @@ namespace Securibox.CloudAgents.Configurations
             }
         }
         /// <summary>
-        /// Gets or sets the password.
+        /// Gets or sets the basic password.
         /// </summary>
         /// <value>
         /// The password.
@@ -116,7 +110,7 @@ namespace Securibox.CloudAgents.Configurations
             }
         }
         /// <summary>
-        /// Gets or sets the name of the cert.
+        /// Gets or sets the certificate thumbprint
         /// </summary>
         /// <value>
         /// The name of the cert.

@@ -12,7 +12,10 @@ namespace Securibox.CloudAgents.Api.Documents
     {
         private readonly string _path = "agents";
         private readonly string _apiVersion = "v1";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AgentsClient"/> class.
+        /// </summary>
+        /// <param name="authenticatedClient">An authentication client</param>
         public AgentsClient(AuthClient authenticatedClient):base(authenticatedClient)
         {
         }

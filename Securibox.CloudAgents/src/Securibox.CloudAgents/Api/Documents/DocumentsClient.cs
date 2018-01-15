@@ -5,11 +5,17 @@ using System.Collections.Generic;
 
 namespace Securibox.CloudAgents.Api.Documents
 {
+    /// <summary>
+    /// Wrapper for the Documents related methods.
+    /// </summary>
     public class DocumentsClient : ApiObjectClient
     {
         private readonly string _path = "documents";
         private readonly string _apiVersion = "v1";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DocumentsClient"/> class.
+        /// </summary>
+        /// <param name="authenticatedClient">An authentication client</param>
         public DocumentsClient(AuthClient authenticatedClient):base(authenticatedClient)
         {
         }
@@ -37,10 +43,11 @@ namespace Securibox.CloudAgents.Api.Documents
             return response.GetObjectFromResponse<List<Document>>();
         }
         /// <summary>
-        /// Gets the document.
+        /// Gets a specific document.
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <param name="id">The document identifier.</param>
+        /// <param name="includeContent">Specifies if the response should include the document content encoded as base 64.</param>
+        /// <returns>A Document object</returns>
         public Document GetDocument(int id, bool includeContent = true)
         {
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/{2}", _apiVersion, _path, id));
@@ -53,7 +60,8 @@ namespace Securibox.CloudAgents.Api.Documents
         /// <summary>
         /// Acknowledges the document delivery.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="id">The document identifier.</param>
+        /// <returns>true if the acknowledgment is successfull, false otherwise.</returns>
         public bool AcknowledgeDocumentDelivery(int id)
         {
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/{2}/ack", _apiVersion, _path, id));

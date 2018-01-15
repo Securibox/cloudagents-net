@@ -4,7 +4,10 @@ using System.Net.Http;
 
 namespace Securibox.CloudAgents.Core
 {
-    public class ApiResponse : IApiResponse
+    /// <summary>
+    /// Class representing an API response
+    /// </summary>
+    public class ApiResponse
     {
         #region Private fields
         private string _bodyContent;
@@ -14,7 +17,44 @@ namespace Securibox.CloudAgents.Core
         private string _responseMessage;
         #endregion
 
+        #region Public field
+        /// <summary>
+        /// The body's content of the HTTP response.
+        /// </summary>
+        public string BodyContent
+        {
+            get
+            {
+                return _bodyContent;
+            }
+        }
+        /// <summary>
+        /// The message parsed from the HTTP response.
+        /// </summary>
+        public string ResponseMessage
+        {
+            get
+            {
+                return this._responseMessage;
+            }
+        }
+        /// <summary>
+        /// The <see cref="HttpStatusCode"/> returned by the HTTP response.
+        /// </summary>
+        public HttpStatusCode StatusCode
+        {
+            get
+            {
+                return this._statusCode;
+            }
+        }
+        #endregion
+
         #region Constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiResponse"/> class.
+        /// </summary>
+        /// <param name="response">The HTTP response returned by the API.</param>
         public ApiResponse(HttpResponseMessage response)
         {
             if (response == null)
@@ -26,21 +66,11 @@ namespace Securibox.CloudAgents.Core
         }
         #endregion
 
-        public string GetBodyContent()
-        {
-            return this._bodyContent;
-        }
-
-        public string GetResponseMessage()
-        {
-            return this._responseMessage;
-        }
-
-        public HttpStatusCode GetStatusCode()
-        {
-            return this._statusCode;
-        }
-
+        /// <summary>
+        /// Deserializes the response to the correct type.
+        /// </summary>
+        /// <typeparam name="RType">The expected type</typeparam>
+        /// <returns>The deserialized content</returns>
         public RType GetObjectFromResponse<RType>()
         {
             if (string.IsNullOrEmpty(this._bodyContent))

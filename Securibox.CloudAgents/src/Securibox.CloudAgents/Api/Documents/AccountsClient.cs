@@ -12,7 +12,10 @@ namespace Securibox.CloudAgents.Api.Documents
     {
         private readonly string _path = "accounts";
         private readonly string _apiVersion = "v1";
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountsClient"/> class.
+        /// </summary>
+        /// <param name="authenticatedClient">An authentication client</param>
         public AccountsClient(AuthClient authenticatedClient): base (authenticatedClient)
         {
         }
@@ -81,6 +84,7 @@ namespace Securibox.CloudAgents.Api.Documents
         /// Creates and optionally synchronizes an account.
         /// </summary>
         /// <param name="apiAccount">The account object to be created.  </param>
+        /// <param name="synchronize">Specifies if the account is to be synchronized immediatly after the creation. </param>
         /// <returns>The created account.</returns>
         public Account CreateAccount(Account apiAccount, bool synchronize)
         {
@@ -123,7 +127,7 @@ namespace Securibox.CloudAgents.Api.Documents
 
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/{2}", _apiVersion, _path, customerAccountId));
             var apiResponse = _authenticatedClient.HttpClient.ApiDelete(requestUri);
-            if (apiResponse.GetStatusCode() == System.Net.HttpStatusCode.OK)
+            if (apiResponse.StatusCode == System.Net.HttpStatusCode.OK)
                 return true;
 
             return false;
@@ -261,7 +265,7 @@ namespace Securibox.CloudAgents.Api.Documents
             /// </value>
             private string CustomerUserId { get; set; }
             /// <summary>
-            /// Gets or sets a value indicating whether this <see cref="SynchronizeRequest" /> is forced.
+            /// Gets or sets a value indicating whether this <see cref="SynchronizationRequest" /> is forced.
             /// </summary>
             /// <value>
             ///   <c>true</c> if forced; otherwise, <c>false</c>.

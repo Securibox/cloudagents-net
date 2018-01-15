@@ -4,108 +4,69 @@ using System.Collections.Generic;
 namespace Securibox.CloudAgents.Api.Documents.Models
 {
     /// <summary>
-    /// Synchronization class
+    /// A class representing a synchronization performed by an account to try to retreive documents.
     /// </summary>
     public class Synchronization
     {
         /// <summary>
-        /// Gets or sets the account identifier.
-        /// </summary>
-        /// <value>
         /// The account identifier.
-        /// </value>
+        /// </summary>
         public int AccountId { get; set; }
         /// <summary>
-        /// Gets or sets the customer account identifier.
-        /// </summary>
-        /// <value>
         /// The customer account identifier.
-        /// </value>
+        /// </summary>
         public string CustomerAccountId { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is forced.
+        /// A value indicating whether this synchronization is forced.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is forced; otherwise, <c>false</c>.
-        /// </value>
         public bool IsForced { get; set; }
         /// <summary>
-        /// Gets or sets the downloaded docs.
+        /// The number of downloaded documents.
         /// </summary>
-        /// <value>
-        /// The downloaded docs.
-        /// </value>
         public int DownloadedDocs { get; set; }
         /// <summary>
-        /// Gets or sets the detected docs.
+        /// The number of detected documents.
         /// </summary>
-        /// <value>
-        /// The detected docs.
-        /// </value>
         public int DetectedDocs { get; set; }
         /// <summary>
-        /// Gets or sets the synchronization date.
+        /// The date on which the synchronization has been created.
         /// </summary>
-        /// <value>
-        /// The synchronization date.
-        /// </value> 
         public DateTime CreationDate { get; set; }
         /// <summary>
-        /// Gets or sets the start date.
+        /// The date on which the synchronization has started.
         /// </summary>
-        /// <value>
-        /// The start date.
-        /// </value>
         public DateTime StartDate { get; set; }
         /// <summary>
-        /// Gets or sets the end date date.
+        /// The date on which the synchronization has ended.
         /// </summary>
-        /// <value>
-        /// The end date date.
-        /// </value>
         public DateTime EndDate { get; set; }
         /// <summary>
-        /// Gets or sets the delivery date.
+        /// The date on which the synchronization has been delivered.
         /// </summary>
-        /// <value>
-        /// The delivery date.
-        /// </value>
         public DateTime DeliveryDate { get; set; }
         /// <summary>
-        /// Gets or sets the acknowledgement date.
+        /// The date on which the synchronization has been acknowledged.
         /// </summary>
-        /// <value>
-        /// The acknowledgement date.
-        /// </value>
         public DateTime AcknowledgementDate { get; set; }
         /// <summary>
-        /// Gets or sets the state of the synchronization.
+        /// The state of the overall synchronization.
         /// </summary>
-        /// <value>
-        /// The state of the synchronization.
-        /// </value>
         public SynchronizationState SynchronizationState { get; set; }
         /// <summary>
-        /// The StateDetails private member
+        /// The state of the agent related process.
         /// </summary>
         public SynchronizationStateDetails SynchronizationStateDetails { get; set; }
         /// <summary>
-        /// The _mode
+        /// The synchronization mode
         /// </summary>
         public SynchronizationMode SynchronizationMode { get; set; }
         /// <summary>
-        /// Gets or sets the API version.
-        /// </summary>
-        /// <value>
         /// The API version.
-        /// </value>
+        /// </summary>
         public string ApiVersion { get; set; }
         /// <summary>
-        /// Gets or sets the documents.
+        /// A list of documents downloaded through this synchronization.
         /// </summary>
-        /// <value>
-        /// The documents.
-        /// </value>
         public List<Document> Documents { get; set; }
     }
 }

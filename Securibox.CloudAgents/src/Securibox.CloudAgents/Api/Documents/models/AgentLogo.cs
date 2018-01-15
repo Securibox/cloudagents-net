@@ -1,29 +1,29 @@
 ﻿namespace Securibox.CloudAgents.Api.Documents.Models
 {
     /// <summary>
-    /// AgentLogo
+    /// Class that will hold the agent logos.
     /// </summary>
     public class AgentLogo
     {
         /// <summary>
-        /// Gets or sets the width.
+        /// Gets or sets the agent logo width.
         /// </summary>
         /// <value>
-        /// The width.
+        /// The agent logo width.
         /// </value>
         public int Width { get; set; }
         /// <summary>
-        /// Gets or sets the height.
+        /// Gets or sets the agent logo height.
         /// </summary>
         /// <value>
-        /// The height.
+        /// The agent logo height.
         /// </value>
         public int Height { get; set; }
         /// <summary>
-        /// Gets or sets the URL.
+        /// Gets or sets the agent logo URL.
         /// </summary>
         /// <value>
-        /// The URL.
+        /// The agent logo URL.
         /// </value>
         public string Url { get; set; }
     }

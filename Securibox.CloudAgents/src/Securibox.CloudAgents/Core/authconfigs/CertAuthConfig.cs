@@ -3,9 +3,12 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Securibox.CloudAgents.Core.AuthConfigs
 {
+    /// <summary>
+    /// Class representing the client certificate authentication client.
+    /// </summary>
     public sealed class CertAuthConfig : AuthClientConfig
     {
-        // <summary>
+        /// <summary>
         /// The _handler
         /// </summary>
         private WebRequestHandler _handler;
@@ -24,6 +27,7 @@ namespace Securibox.CloudAgents.Core.AuthConfigs
         /// <summary>
         /// Initializes a new instance of the <see cref="CertAuthConfig"/> class.
         /// </summary>
+        /// <param name="certificateContent">The certificate byte array.</param>
         public CertAuthConfig(byte[] certificateContent)
         {
             var certificate = new X509Certificate2(certificateContent);
@@ -34,8 +38,8 @@ namespace Securibox.CloudAgents.Core.AuthConfigs
         /// <summary>
         /// Initializes a new instance of the <see cref="CertAuthConfig" /> class.
         /// </summary>
-        /// <param name="certificateContent">Content of the certificate.</param>
-        /// <param name="password">The password.</param>
+        /// <param name="certificateContent">The certificate byte array.</param>
+        /// <param name="password">The private key password.</param>
         public CertAuthConfig(byte[] certificateContent, string password)
         {
             var certificate = new X509Certificate2(certificateContent, password);

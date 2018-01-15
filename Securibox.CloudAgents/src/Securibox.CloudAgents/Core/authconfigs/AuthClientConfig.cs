@@ -4,7 +4,7 @@ using System.Net.Http;
 namespace Securibox.CloudAgents.Core.AuthConfigs
 {
     /// <summary>
-    /// AuthConfig class.
+    /// Abstract class representing a authentication client to call the API.
     /// </summary>
     public abstract class AuthClientConfig : IDisposable
     {

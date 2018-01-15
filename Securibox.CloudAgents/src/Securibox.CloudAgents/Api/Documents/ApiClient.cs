@@ -101,7 +101,7 @@ namespace Securibox.CloudAgents.Api.Documents
         /// <summary>
         /// Initializes the SCA Documents wrapper using a provided SCA base address and a authentication configuration.
         /// </summary>
-        /// <param name="baseAddress">The SCA platform base address in uri format</param>
+        /// <param name="baseUri">The SCA platform base address in uri format</param>
         /// <param name="authConfig">An authentication configuration</param>
         public ApiClient(Uri baseUri, AuthClientConfig authConfig): base(baseUri, authConfig) { }
         /// <summary>

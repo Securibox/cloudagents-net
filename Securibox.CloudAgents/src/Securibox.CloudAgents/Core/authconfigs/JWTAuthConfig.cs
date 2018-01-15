@@ -1,11 +1,14 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Securibox.CloudAgents.Core.AuthConfigs
 {
+    /// <summary>
+    /// Class representing the Json Web Token authentication client.
+    /// </summary>
     public sealed class JWTAuthConfig : AuthClientConfig
     {
         private X509Certificate2 _x509Certificate2 = null;

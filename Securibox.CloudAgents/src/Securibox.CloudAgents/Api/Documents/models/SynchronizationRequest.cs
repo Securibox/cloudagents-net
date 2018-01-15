@@ -1,32 +1,29 @@
 ﻿namespace Securibox.CloudAgents.Api.Documents.Models
 {
     /// <summary>
-    /// SynchronizationRequest class
+    /// A class representing an synchronization launch request.
     /// </summary>
     public class SynchronizationRequest
     {
         /// <summary>
-        /// Gets or sets the customer account identifier.
-        /// </summary>
-        /// <value>
         /// The customer account identifier.
-        /// </value>
+        /// </summary>
         public string CustomerAccountId { get; set; }
         /// <summary>
-        /// Gets or sets the customer user identifier.
-        /// </summary>
-        /// <value>
         /// The customer user identifier.
-        /// </value>
+        /// </summary>
         public string CustomerUserId { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="SynchronizeRequest" /> is forced.
+        /// A value indicating whether this <see cref="SynchronizationRequest" /> is forced.
         /// </summary>
-        /// <value>
-        ///   <c>true</c> if forced; otherwise, <c>false</c>.
-        /// </value>
         public bool IsForced { get; set; }
 
+        /// <summary>
+        /// Initializes the SynchronizationRequest class.
+        /// </summary>
+        /// <param name="customerAccountId">The customer account identifier.</param>
+        /// <param name="isForced">A value indicating whether this <see cref="SynchronizationRequest" /> is forced.</param>
+        /// <param name="customerUserId"> The customer user identifier</param>
         public SynchronizationRequest(string customerAccountId, bool isForced, string customerUserId = null)
         {
             this.CustomerAccountId = customerAccountId;

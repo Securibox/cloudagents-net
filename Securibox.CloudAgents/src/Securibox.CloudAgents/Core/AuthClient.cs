@@ -6,14 +6,14 @@ using Securibox.CloudAgents.Configurations;
 
 namespace Securibox.CloudAgents.Core
 {
+    /// <summary>
+    /// Class representing an authentication client
+    /// </summary>
     public class AuthClient : IDisposable
     {
         /// <summary>
         /// Gets the HTTP client.
         /// </summary>
-        /// <value>
-        /// The HTTP client.
-        /// </value>
         public CloudAgentsHttpClient HttpClient
         {
             get
@@ -26,10 +26,11 @@ namespace Securibox.CloudAgents.Core
         /// The _auth configuration
         /// </summary>
         private AuthClientConfig _authConfig;
-        /// <summary>
-        /// The _base URI
-        /// </summary>
+
         private Uri _baseUri;
+        /// <summary>
+        /// Securibox Cloud Agents base URL
+        /// </summary>
         public Uri BaseUri
         {
             get

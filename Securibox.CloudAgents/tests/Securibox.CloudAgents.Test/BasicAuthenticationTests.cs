@@ -5,6 +5,7 @@ using Securibox.CloudAgents.Api.Documents.Models;
 using Securibox.CloudAgents.Core;
 using Securibox.CloudAgents.Core.AuthConfigs;
 using Securibox.CloudAgents.Test;
+using System;
 
 namespace cloudagents_csharp.tests
 {
@@ -15,7 +16,7 @@ namespace cloudagents_csharp.tests
 
         public BasicAuthenticationTests()
         {
-            //BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
+            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
             _apiClient = new ApiClient();
         }
 
@@ -90,6 +91,18 @@ namespace cloudagents_csharp.tests
 
             Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Completed ||
                             synchronization.SynchronizationStateDetails == SynchronizationStateDetails.CompletedNothingNewToDownload);
+        }
+        [TestMethod]
+        public void DownloadDocument()
+        {
+            var documents = _apiClient.DocumentsClient.SearchDocuments(Constants.CustomerAccountId);
+            foreach(var document in documents)
+            {
+                byte[] documentContent = Convert.FromBase64String(document.Base64Content);
+                System.IO.File.WriteAllBytes(@"C:\Temp\" + document.Name, documentContent);
+                _apiClient.DocumentsClient.AcknowledgeDocumentDelivery(document.Id);
+            }
+            
         }
 
         [TestMethod]
