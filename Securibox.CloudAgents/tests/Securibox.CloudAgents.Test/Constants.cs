@@ -10,13 +10,9 @@ namespace Securibox.CloudAgents.Test
     {
         public static string AgentId = "B4464D56-8126-4196-A1BB-E2BCB8274C27";
 
-        //public static string AgentUsername = "[AgentUserName]";
+        public static string AgentUsername = "[AgentUserName]";
 
-        //public static string AgentPassword = "[AgentPassword]";
-
-        public static string AgentUsername = "sgavdsilva@gmail.com";
-
-        public static string AgentPassword = "Password12$";
+        public static string AgentPassword = "[AgentPassword]";
 
         public static string CustomerUserId = "TEST_CloudAgent_CSharp";
 
