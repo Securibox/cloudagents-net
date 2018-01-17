@@ -16,8 +16,15 @@ namespace cloudagents_csharp.tests
 
         public BasicAuthenticationTests()
         {
-            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
+            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[username]", "[password]");
             _apiClient = new ApiClient();
+        }
+
+        [TestMethod]
+        public void GetNonExistingAgentByIdTest()
+        {
+            var agent = _apiClient.AgentsClient.GetAgentByIdentifier("11c1076a4554403786058c5a07a4a973");
+            Assert.IsTrue(agent == null);
         }
 
         [TestMethod]
