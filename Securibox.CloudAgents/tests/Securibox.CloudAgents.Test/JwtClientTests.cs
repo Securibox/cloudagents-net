@@ -2,7 +2,6 @@
 using Securibox.CloudAgents.Api.Documents;
 using System.Collections.Generic;
 using Securibox.CloudAgents.Api.Documents.Models;
-using System.IdentityModel.Tokens.Jwt;
 using Securibox.CloudAgents.Core;
 using Securibox.CloudAgents.Core.AuthConfigs;
 
