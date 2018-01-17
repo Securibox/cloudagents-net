@@ -45,8 +45,10 @@ namespace cloudagents_csharp.tests
             Assert.IsTrue(agents != null && agents.Count > 0);
             agents = _apiClient.AgentsClient.SearchAgent(null, null, false, "Non-existant agent name");
             Assert.IsTrue(agents == null || agents.Count == 0);
+            agents = _apiClient.AgentsClient.SearchAgent(AgentCountryCode.AD);
+            Assert.IsTrue(agents != null && agents.Count == 0);
         }
-
+        
         [TestMethod]
         public void GetCategoriesListTest()
         {
