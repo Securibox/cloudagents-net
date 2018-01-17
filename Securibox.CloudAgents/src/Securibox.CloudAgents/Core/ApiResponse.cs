@@ -54,12 +54,14 @@ namespace Securibox.CloudAgents.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiResponse"/> class.
         /// </summary>
+        public ApiResponse() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiResponse"/> class.
+        /// </summary>
         /// <param name="response">The HTTP response returned by the API.</param>
         public ApiResponse(HttpResponseMessage response)
         {
-            if (response == null)
-                throw new ArgumentNullException("response", "Response is missing.");
-            
             this._bodyContent = response.Content.ReadAsStringAsync().Result;
             this._responseMessage = response.ReasonPhrase;
             this._statusCode = response.StatusCode;
