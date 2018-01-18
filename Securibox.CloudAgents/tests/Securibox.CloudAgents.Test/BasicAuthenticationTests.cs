@@ -16,7 +16,7 @@ namespace cloudagents_csharp.tests
 
         public BasicAuthenticationTests()
         {
-            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[username]", "[password]");
+            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[Username]", "[Password]");
             _apiClient = new ApiClient();
         }
 
@@ -101,6 +101,17 @@ namespace cloudagents_csharp.tests
             Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Completed ||
                             synchronization.SynchronizationStateDetails == SynchronizationStateDetails.CompletedNothingNewToDownload);
         }
+
+        [TestMethod]
+        public void AcknowledgeSynchTest()
+        {
+            var synchAcknowledgement = _apiClient.SynchronizationsClient.AcknowledgeSynchronizationDelivery("", new int[] { 11111 }, new int[] { });
+            Assert.IsTrue(synchAcknowledgement);
+        }
+
+
+
+
         [TestMethod]
         public void DownloadDocument()
         {
