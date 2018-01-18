@@ -111,21 +111,21 @@ namespace Securibox.CloudAgents.Api.Documents
             /// <value>
             /// The customer account identifier.
             /// </value>
-            private string CustomerAccountId { get; set; }
+            public string CustomerAccountId { get; set; }
             /// <summary>
             /// Gets or sets the delivered document ids.
             /// </summary>
             /// <value>
             /// The delivered document ids.
             /// </value>
-            private int[] DocumentIds { get; set; }
+            public int[] DocumentIds { get; set; }
             /// <summary>
             /// Gets or sets the missing document ids.
             /// </summary>
             /// <value>
             /// The missing document ids.
             /// </value>
-            private int[] MissingDocumentIds { get; set; }
+            public int[] MissingDocumentIds { get; set; }
 
             public SynchronizationAcknowledgement(string customerAccountId, int[] documentIds, int[] missingDocumentIds)
             {
