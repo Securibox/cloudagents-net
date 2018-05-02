@@ -14,8 +14,7 @@ namespace Securibox.CloudAgents.Test.Documents
 
         public CertificateClientTests()
         {
-            //CertAuthConfig authConfig = new CertAuthConfig("[CertificateThumbprint]");
-            CertAuthConfig authConfig = new CertAuthConfig("21e7b3b03524f33e396bd41c221df16436a2cbf8");
+            CertAuthConfig authConfig = new CertAuthConfig("[CertificateThumbprint]");
             _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
         }
 
@@ -98,16 +97,4 @@ namespace Securibox.CloudAgents.Test.Documents
             _apiClient.AccountsClient.DeleteAccount(Constants.CustomerAccountId);
 
         }
-
-        [TestMethod]
-        public void ListDocumentsByAccountTest()
-        {
-            var account = _apiClient.AccountsClient.GetAccount(Constants.CustomerAccountId);
-
-
-            var documents = _apiClient.AccountsClient.ListDocumentsByAccount(Constants.CustomerAccountId);
-            Assert.IsTrue(documents.Count > 0);
-
-        }
-    }
 }

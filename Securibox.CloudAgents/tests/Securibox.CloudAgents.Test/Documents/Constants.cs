@@ -16,7 +16,6 @@ namespace Securibox.CloudAgents.Test.Documents
 
         public static string CustomerUserId = "TEST_CloudAgent_CSharp";
 
-        //public static string CustomerAccountId = "CloudAgent_CSharp_Acount1";
-        public static string CustomerAccountId = "SM--1";
+        public static string CustomerAccountId = "CloudAgent_CSharp_Acount1";
     }
 }
