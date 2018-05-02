@@ -49,7 +49,7 @@ namespace Securibox.CloudAgents.Api.Documents
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/search", _apiVersion, _path));
             if (countryCode != null)
             {
-                requestUri = requestUri.AddQueryParameter("countryCode", countryCode.Value.ToString());
+                requestUri = requestUri.AddQueryParameter("countryCode", ((int)countryCode).ToString());
             }
             requestUri = requestUri.AddQueryParameter("culture", culture);
             requestUri = requestUri.AddQueryParameter("includeLogo", includeLogo);

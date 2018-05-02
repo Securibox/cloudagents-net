@@ -16,8 +16,15 @@ namespace Securibox.CloudAgents.Test.Documents
 
         public BasicAuthenticationTests()
         {
-            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
+            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[Username]", "[Password]");
             _apiClient = new ApiClient();
+        }
+
+        [TestMethod]
+        public void GetNonExistingAgentByIdTest()
+        {
+            var agent = _apiClient.AgentsClient.GetAgentByIdentifier("11c1076a4554403786058c5a07a4a973");
+            Assert.IsTrue(agent == null);
         }
 
         [TestMethod]
@@ -38,8 +45,10 @@ namespace Securibox.CloudAgents.Test.Documents
             Assert.IsTrue(agents != null && agents.Count > 0);
             agents = _apiClient.AgentsClient.SearchAgent(null, null, false, "Non-existant agent name");
             Assert.IsTrue(agents == null || agents.Count == 0);
+            agents = _apiClient.AgentsClient.SearchAgent(AgentCountryCode.AD);
+            Assert.IsTrue(agents != null && agents.Count == 0);
         }
-
+        
         [TestMethod]
         public void GetCategoriesListTest()
         {
@@ -92,6 +101,17 @@ namespace Securibox.CloudAgents.Test.Documents
             Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Completed ||
                             synchronization.SynchronizationStateDetails == SynchronizationStateDetails.CompletedNothingNewToDownload);
         }
+
+        [TestMethod]
+        public void AcknowledgeSynchTest()
+        {
+            var synchAcknowledgement = _apiClient.SynchronizationsClient.AcknowledgeSynchronizationDelivery("", new int[] { 11111 }, new int[] { });
+            Assert.IsTrue(synchAcknowledgement);
+        }
+
+
+
+
         [TestMethod]
         public void DownloadDocument()
         {
