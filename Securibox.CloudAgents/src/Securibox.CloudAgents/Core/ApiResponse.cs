@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Net;
 using System.Net.Http;
 
@@ -54,6 +55,11 @@ namespace Securibox.CloudAgents.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiResponse"/> class.
         /// </summary>
+        public ApiResponse() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiResponse"/> class.
+        /// </summary>
         /// <param name="response">The HTTP response returned by the API.</param>
         public ApiResponse(HttpResponseMessage response)
         {
@@ -74,8 +80,16 @@ namespace Securibox.CloudAgents.Core
         public RType GetObjectFromResponse<RType>()
         {
             if (string.IsNullOrEmpty(this._bodyContent))
-                return default(RType);
-
+            {
+                if (typeof(RType).IsGenericType && typeof(RType).GetGenericTypeDefinition() == typeof(System.Collections.Generic.List<>))
+                {
+                    return (RType)Activator.CreateInstance(typeof(RType));
+                }
+                else
+                {
+                    return default(RType);
+                }
+            }
             return Newtonsoft.Json.JsonConvert.DeserializeObject<RType>(this._bodyContent);
         }
     }

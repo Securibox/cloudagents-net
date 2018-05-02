@@ -52,6 +52,8 @@ namespace Securibox.CloudAgents.Core
             {
                 if (response.IsSuccessStatusCode)
                     return new ApiResponse(response);
+                if ((int)response.StatusCode == 404)
+                    return new Core.ApiResponse();
                 throw new ApiClientHttpException((int)response.StatusCode, response.Content.ReadAsStringAsync().Result);
             }
         }

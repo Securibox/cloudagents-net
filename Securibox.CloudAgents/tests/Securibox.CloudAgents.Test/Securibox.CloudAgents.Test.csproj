@@ -63,10 +63,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="BasicAuthenticationTests.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="JwtClientTests.cs" />
-    <Compile Include="CertificateClientTests.cs" />
+    <Compile Include="Banks\CertificateClientTests.cs" />
+    <Compile Include="Banks\BasicAuthenticationTests.cs" />
+    <Compile Include="Banks\Constants.cs" />
+    <Compile Include="Documents\BasicAuthenticationTests.cs" />
+    <Compile Include="Documents\Constants.cs" />
+    <Compile Include="Documents\JwtClientTests.cs" />
+    <Compile Include="Documents\CertificateClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,20 +4,18 @@ using System.Collections.Generic;
 using Securibox.CloudAgents.Api.Documents.Models;
 using Securibox.CloudAgents.Core;
 using Securibox.CloudAgents.Core.AuthConfigs;
-using Securibox.CloudAgents.Test;
-using System;
 
-namespace cloudagents_csharp.tests
+namespace Securibox.CloudAgents.Test.Documents
 {
     [TestClass]
-    public class BasicAuthenticationTests
+    public class JwtClientTests
     {
         private ApiClient _apiClient;
 
-        public BasicAuthenticationTests()
+        public JwtClientTests()
         {
-            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
-            _apiClient = new ApiClient();
+            JWTAuthConfig authConfig = new JWTAuthConfig("");
+            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
         }
 
         [TestMethod]
@@ -92,18 +90,6 @@ namespace cloudagents_csharp.tests
             Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Completed ||
                             synchronization.SynchronizationStateDetails == SynchronizationStateDetails.CompletedNothingNewToDownload);
         }
-        [TestMethod]
-        public void DownloadDocument()
-        {
-            var documents = _apiClient.DocumentsClient.SearchDocuments(Constants.CustomerAccountId);
-            foreach(var document in documents)
-            {
-                byte[] documentContent = Convert.FromBase64String(document.Base64Content);
-                System.IO.File.WriteAllBytes(@"C:\Temp\" + document.Name, documentContent);
-                _apiClient.DocumentsClient.AcknowledgeDocumentDelivery(document.Id);
-            }
-            
-        }
 
         [TestMethod]
         public void DeleteAccountTest()
@@ -111,6 +97,5 @@ namespace cloudagents_csharp.tests
             _apiClient.AccountsClient.DeleteAccount(Constants.CustomerAccountId);
 
         }
-
     }
 }

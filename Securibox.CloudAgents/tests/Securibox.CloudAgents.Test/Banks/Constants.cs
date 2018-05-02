@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Securibox.CloudAgents.Test
+namespace Securibox.CloudAgents.Test.Banks
 {
     class Constants
     {
-        public static string AgentId = "B4464D56-8126-4196-A1BB-E2BCB8274C27";
+        public static string AgentId = "4d7d80f915914de29466733b5c4e404f";
 
-        public static string AgentUsername = "[AgentUserName]";
+        public static string AgentUsername = "008414601076";
 
-        public static string AgentPassword = "[AgentPassword]";
+        public static string AgentPassword = "Password12$";
 
         public static string CustomerUserId = "TEST_CloudAgent_CSharp";
 

@@ -2,21 +2,22 @@
 using Securibox.CloudAgents.Api.Documents;
 using System.Collections.Generic;
 using Securibox.CloudAgents.Api.Documents.Models;
-using System.IdentityModel.Tokens.Jwt;
 using Securibox.CloudAgents.Core;
 using Securibox.CloudAgents.Core.AuthConfigs;
+using Securibox.CloudAgents.Test;
+using System;
 
-namespace Securibox.CloudAgents.Test
+namespace Securibox.CloudAgents.Test.Documents
 {
     [TestClass]
-    public class JwtClientTests
+    public class BasicAuthenticationTests
     {
         private ApiClient _apiClient;
 
-        public JwtClientTests()
+        public BasicAuthenticationTests()
         {
-            JWTAuthConfig authConfig = new JWTAuthConfig("");
-            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
+            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
+            _apiClient = new ApiClient();
         }
 
         [TestMethod]
@@ -91,6 +92,18 @@ namespace Securibox.CloudAgents.Test
             Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Completed ||
                             synchronization.SynchronizationStateDetails == SynchronizationStateDetails.CompletedNothingNewToDownload);
         }
+        [TestMethod]
+        public void DownloadDocument()
+        {
+            var documents = _apiClient.DocumentsClient.SearchDocuments(Constants.CustomerAccountId);
+            foreach(var document in documents)
+            {
+                byte[] documentContent = Convert.FromBase64String(document.Base64Content);
+                System.IO.File.WriteAllBytes(@"C:\Temp\" + document.Name, documentContent);
+                _apiClient.DocumentsClient.AcknowledgeDocumentDelivery(document.Id);
+            }
+            
+        }
 
         [TestMethod]
         public void DeleteAccountTest()
@@ -98,5 +111,6 @@ namespace Securibox.CloudAgents.Test
             _apiClient.AccountsClient.DeleteAccount(Constants.CustomerAccountId);
 
         }
+
     }
 }
