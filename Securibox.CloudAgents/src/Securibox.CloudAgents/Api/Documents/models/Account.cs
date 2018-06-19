@@ -46,5 +46,9 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// Gets or set the account mode.
         /// </summary>
         public string Mode { get; set; }
+        /// <summary>
+        /// Multi factor authentication data 
+        /// </summary>
+        public AdditionalAuthData AdditionalAuthenticationData { get; set; }
     }
 }
