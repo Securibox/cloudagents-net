@@ -95,10 +95,25 @@
         /// The agent website is unavailable.
         /// </summary>
         ServerUnavailable,
-
         /// <summary>
         /// The website is requiring the account owner to validate a notification.
         /// </summary>
-        PersonalNotification
+        PersonalNotification,
+        /// <summary>
+        /// There's a temporary error in the agent website
+        /// </summary>
+        TemporaryServerError,
+        /// <summary>
+        /// A captcha needs to be solved for the agent to perform login
+        /// </summary>
+        CaptchaFound,
+        /// <summary>
+        /// The credential necessary for multi-factor authentication is wrong
+        /// </summary>
+        WrongOptionalCredentials,
+        /// <summary>
+        /// The secret code for the multi-fact authentication is wrong
+        /// </summary>
+        WrongMFACode
     }
 }
