@@ -83,6 +83,8 @@
     <Compile Include="Api\Documents\CategoriesClient.cs" />
     <Compile Include="Api\Documents\DocumentsClient.cs" />
     <Compile Include="Api\Documents\Models\Account.cs" />
+    <Compile Include="Api\Documents\Models\AdditionalAuthData.cs" />
+    <Compile Include="Api\Documents\Models\AdditionalAuthRequest.cs" />
     <Compile Include="Api\Documents\Models\Agent.cs" />
     <Compile Include="Api\Documents\Models\AgentCountryCode.cs" />
     <Compile Include="Api\Documents\Models\AgentCurrentState.cs" />

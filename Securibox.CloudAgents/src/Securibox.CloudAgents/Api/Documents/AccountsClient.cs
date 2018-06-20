@@ -198,7 +198,6 @@ namespace Securibox.CloudAgents.Api.Documents
             var response = _authenticatedClient.HttpClient.ApiGet(requestUri);
             return response.GetObjectFromResponse<Synchronization>();
         }
-
         /// <summary>
         /// Launches the synchronization for a specific account.
         /// </summary>
@@ -214,6 +213,18 @@ namespace Securibox.CloudAgents.Api.Documents
             var synchRequest = new SynchronizationRequest(customerAccountId, isForced);
             var response = _authenticatedClient.HttpClient.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(synchRequest));
             return response.GetObjectFromResponse<Synchronization>();
+        }
+
+        public bool AddMultiFactorAuthenticationSecretCode(string customerAccountId, string secretCode)
+        {
+            if (string.IsNullOrEmpty(customerAccountId))
+                throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
+
+            var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/{2}/mfa", _apiVersion, _path, customerAccountId));
+            var additionalAuthRequest = new AdditionalAuthRequest(customerAccountId, secretCode);
+            var response = _authenticatedClient.HttpClient.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(additionalAuthRequest));
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
 

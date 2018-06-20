@@ -132,5 +132,105 @@ namespace Securibox.CloudAgents.Test.Documents
 
         }
 
+        [TestMethod]
+        public void MFAFullWorkflowTest()
+        {
+            #region CreateAccount
+            var credentials = new List<Credential>
+                {
+                    new Credential {Position = 0, Value = Constants.AgentUsername, Alg = null },
+                    new Credential { Position = 1, Value = Constants.AgentPassword, Alg = null }
+                };
+
+            var apiAccount = new Account
+            {
+                AgentId = Constants.AgentId,
+                CustomerAccountId = Constants.CustomerAccountId,
+                CustomerUserId = Constants.CustomerUserId,
+                Mode = "NoAutomaticSynch", // MFA accounts should have NoAutomaticSynch mode
+                Name = "Account 1 - User defined name",
+                Credentials = credentials
+            };
+
+            var account = _apiClient.AccountsClient.CreateAccount(apiAccount, false);
+            #endregion
+
+            #region FirstSynchronization
+            var synchronization = _apiClient.AccountsClient.SynchronizeAccount(account.CustomerAccountId, true);
+            while (synchronization.SynchronizationStateDetails == SynchronizationStateDetails.NewAccount ||
+                    synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Scheduled ||
+                   synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Pending ||
+                   synchronization.SynchronizationStateDetails == SynchronizationStateDetails.InProgress)
+            {
+                System.Threading.Thread.Sleep(5000);
+                synchronization = _apiClient.AccountsClient.GetLastSynchronizationsOfAccount(account.CustomerAccountId);
+            }
+
+            Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.AdditionalAuthenticationRequired);
+            #endregion
+
+            // Get the account with the additional authentication data
+            apiAccount = _apiClient.AccountsClient.GetAccount(Constants.CustomerAccountId);
+
+            // and confirm that it hasn't expired
+            Assert.IsTrue(apiAccount.AdditionalAuthenticationData.ExpirationDate > DateTime.UtcNow);
+
+            #region SaveSecretCode
+            string sbxSecretCode = "[SecretCode]"; //Insert secret code that you receive
+
+            // Save the secret code, it will also check if the mfa data hasn't expired, and it will synchronize
+            bool isSaved = _apiClient.AccountsClient.AddMultiFactorAuthenticationSecretCode(apiAccount.CustomerAccountId, sbxSecretCode);
+            Assert.IsTrue(isSaved);
+            #endregion
+
+            #region Second Synchronization
+            // Keep checking the last synchronization of the account to make sure that it reaches a final state
+            synchronization = _apiClient.AccountsClient.GetLastSynchronizationsOfAccount(apiAccount.CustomerAccountId);
+            while (synchronization.SynchronizationStateDetails == SynchronizationStateDetails.NewAccount ||
+                    synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Scheduled ||
+                   synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Pending ||
+                   synchronization.SynchronizationStateDetails == SynchronizationStateDetails.InProgress)
+            {
+                System.Threading.Thread.Sleep(5000);
+                synchronization = _apiClient.AccountsClient.GetLastSynchronizationsOfAccount(apiAccount.CustomerAccountId);
+            }
+
+            // If the code is correct, the synchronization will be completed
+            Assert.IsTrue(synchronization.SynchronizationStateDetails != SynchronizationStateDetails.WrongMFACode);
+            #endregion
+        }
+
+        [TestMethod]
+        public void SaveWrongMFASecretCodeAndSynchronizeTest()
+        {
+            // Get the account
+            var apiAccount = _apiClient.AccountsClient.GetAccount(Constants.CustomerAccountId);
+
+            // and confirm that the it hasn't expired
+            Assert.IsTrue(apiAccount.AdditionalAuthenticationData.ExpirationDate > DateTime.UtcNow);
+
+            string sbxSecretCode = "wrongcode";
+            // Save the secret code, it will also check if the mfa data hasn't expired, and it will synchronize
+            bool isSaved = _apiClient.AccountsClient.AddMultiFactorAuthenticationSecretCode(apiAccount.CustomerAccountId, sbxSecretCode);
+            Assert.IsTrue(isSaved);
+
+            #region Synchronize
+            // Keep checking the last synchronization of the account to make sure that it reaches a final state
+            var synchronization = _apiClient.AccountsClient.GetLastSynchronizationsOfAccount(apiAccount.CustomerAccountId);
+            while (synchronization.SynchronizationStateDetails == SynchronizationStateDetails.NewAccount ||
+                    synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Scheduled ||
+                   synchronization.SynchronizationStateDetails == SynchronizationStateDetails.Pending ||
+                   synchronization.SynchronizationStateDetails == SynchronizationStateDetails.InProgress)
+            {
+                System.Threading.Thread.Sleep(5000);
+                synchronization = _apiClient.AccountsClient.GetLastSynchronizationsOfAccount(apiAccount.CustomerAccountId);
+            }
+
+            // If the code is correct, the synchronization will be completed
+            Assert.IsTrue(synchronization.SynchronizationStateDetails == SynchronizationStateDetails.WrongMFACode);
+            #endregion
+
+        }
+
     }
 }
