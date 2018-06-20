@@ -97,4 +97,5 @@ namespace Securibox.CloudAgents.Test.Documents
             _apiClient.AccountsClient.DeleteAccount(Constants.CustomerAccountId);
 
         }
+    }
 }
