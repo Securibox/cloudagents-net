@@ -224,10 +224,7 @@ namespace Securibox.CloudAgents.Api.Documents
             var additionalAuthRequest = new AdditionalAuthRequest(customerAccountId, secretCode);
             var response = _authenticatedClient.HttpClient.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(additionalAuthRequest));
 
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                return true;
-
-            return false;
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
 
