@@ -16,7 +16,7 @@
         /// <summary>
         /// The balance date
         /// </summary>
-        public float BalanceDate { get; set; }
+        public System.DateTime BalanceDate { get; set; }
         /// <summary>
         /// The spent amount
         /// </summary>
