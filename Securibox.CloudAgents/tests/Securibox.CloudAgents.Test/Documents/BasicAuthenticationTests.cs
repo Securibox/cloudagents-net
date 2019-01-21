@@ -1,11 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Securibox.CloudAgents.Api.Documents;
-using System.Collections.Generic;
 using Securibox.CloudAgents.Api.Documents.Models;
-using Securibox.CloudAgents.Core;
 using Securibox.CloudAgents.Core.AuthConfigs;
-using Securibox.CloudAgents.Test;
 using System;
+using System.Collections.Generic;
 
 namespace Securibox.CloudAgents.Test.Documents
 {

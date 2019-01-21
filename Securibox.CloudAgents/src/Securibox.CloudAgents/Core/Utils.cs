@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Claims;
 using System.Web;
-using System.IdentityModel.Tokens;
+//using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Securibox.CloudAgents.Core
 {
@@ -45,7 +47,6 @@ namespace Securibox.CloudAgents.Core
         {
             var iss = x509Certificate2.Issuer;
             var nbf = DateTime.UtcNow.AddMinutes(-1);
-            //var exp = DateTime.UtcNow.AddSeconds(20);
             var exp = DateTime.UtcNow.AddMinutes(5);
             var aud = "Default Securibox JWT Server";
 
@@ -53,7 +54,12 @@ namespace Securibox.CloudAgents.Core
             claims.Add(new Claim("sub", x509Certificate2.Subject));
             claims.Add(new Claim("jti", Guid.NewGuid().ToString("D")));
 
-            X509SigningCredentials credentials = new X509SigningCredentials(x509Certificate2, SecurityAlgorithms.RsaSha256Signature, SecurityAlgorithms.Sha256Digest);
+            SigningCredentials credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(
+                new X509SecurityKey(x509Certificate2),
+                SecurityAlgorithms.RsaSha256Signature,
+                SecurityAlgorithms.Sha256Digest
+                );
+
             var header = new JwtHeader(credentials);
             var payload = new JwtPayload(issuer: iss, audience: aud, claims: claims, notBefore: nbf, expires: exp);
             return new JwtSecurityToken(header, payload);
