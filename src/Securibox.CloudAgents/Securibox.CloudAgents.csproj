@@ -18,7 +18,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/Securibox/cloudagents-net</RepositoryUrl>
     <Description>A C# client library for the Securibox Cloud Agents API (https://sca.securibox.eu)</Description>
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
     <Copyright>Securibox ©  2019</Copyright>
     <PackageIcon>sca-icon.png</PackageIcon>
     <PackageProjectUrl>https://www.securibox.eu/sca</PackageProjectUrl>
