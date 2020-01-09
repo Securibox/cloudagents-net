@@ -135,5 +135,10 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// The creation date.
         /// </value>
         public DateTime CreationDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this agent uses multifactor authentication.
+        /// </summary>
+        public bool IsMFA { get; set; }
     }
 }

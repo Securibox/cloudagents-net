@@ -219,7 +219,7 @@ namespace Securibox.CloudAgents.Api.Documents
         /// </summary>
         /// <param name="customerAccountId">The customer account identifier.</param>
         /// <param name="secretCode">The secret code sent through another channel.</param>
-        /// <returns></returns>
+        /// <returns>True if the code has been successfully sent.</returns>
         public bool AddMultiFactorAuthenticationSecretCode(string customerAccountId, string secretCode)
         {
             if (string.IsNullOrEmpty(customerAccountId))
@@ -230,6 +230,21 @@ namespace Securibox.CloudAgents.Api.Documents
             var response = _authenticatedClient.HttpClient.ApiPost(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(additionalAuthRequest));
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+        /// <summary>
+        /// This method allows you to know on which channel has the secret code been sent to the user when a synchronizationStateDetails reaches the AdditionalAuthenticationRequired status.
+        /// </summary>
+        /// <param name="customerAccountId">The customer account identifier.</param>
+        /// <returns></returns>
+        public AdditionalAuthData GetMultifactorAuthenticationData(string customerAccountId)
+        {
+            if (string.IsNullOrEmpty(customerAccountId))
+                throw new ApiClientHttpException((int)System.Net.HttpStatusCode.BadRequest, "CustomerAccountId missing.");
+
+            var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/{2}/mfa", _apiVersion, _path, customerAccountId));
+            var response = _authenticatedClient.HttpClient.ApiGet(requestUri);
+            return response.GetObjectFromResponse<AdditionalAuthData>();
+
         }
         #endregion
 
