@@ -1,5 +1,6 @@
 # cloudagents-net
 A .NET library for the [Securibox Cloud Agents API](https://sca.securibox.eu).
+
 ![Nuget](https://img.shields.io/nuget/v/Securibox.CloudAgents?label=Securibox.CloudAgents)
 
 
@@ -129,10 +130,10 @@ In this webview, a customer can:
 - Configure, modify or delete an agent account
 - See the list of synchronizations for each account
 
-To use the webview, activate it in the CloudAgents backoffice and use the provided PEM private key to sign the token.
+To use the webview, activate it in the CloudAgents backoffice and use the provided PFX private key to sign the token.
 
 The webview accepts the following url arguments:
-- token: json web token signed with the PEM certificate
+- token: json web token signed with the PFX certificate
 - callback: url where the user is sent on logging out <sub><sup>(ex: https://www.myapp.com - if a state has been provided: https://www.myapp.com?state={state})</sup></sub>
 - lang <sup>optional</sup>: culture to display the page - By default, in fr-FR
 
@@ -141,7 +142,7 @@ Example:
 https://sca-webview.azurewebsites.net?token={token}&callback={callback_url}&state={stateData}
 https://sca-webview.azurewebsites.net?token={token}&callback={callback_url}&state={stateData}&lang=en-us
 ```
-For examples in php to generate the token, [please refer to the test][2].
+For examples in .net to generate the token, [please refer to the test][2].
 
 [1]: https://www.securibox.eu/en/sca/docs.html
 [2]: https://github.com/Securibox/cloudagents-net/blob/master/tests/Securibox.CloudAgents.Tests.NetCore/Documents/WebView.cs
