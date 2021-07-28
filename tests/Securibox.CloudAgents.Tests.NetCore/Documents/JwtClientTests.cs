@@ -3,6 +3,7 @@ using Securibox.CloudAgents.Api.Documents;
 using Securibox.CloudAgents.Api.Documents.Models;
 using Securibox.CloudAgents.Core.AuthConfigs;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Securibox.CloudAgents.Tests.NetCore.Documents
 {
@@ -13,7 +14,8 @@ namespace Securibox.CloudAgents.Tests.NetCore.Documents
 
         public JwtClientTests()
         {
-            JWTAuthConfig authConfig = new JWTAuthConfig("");
+            X509Certificate2 cert = new X509Certificate2(@"C:\Path\To\PfxFile", "[Pfx Password]");
+            JWTAuthConfig authConfig = new JWTAuthConfig(cert);
             _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
         }
 
