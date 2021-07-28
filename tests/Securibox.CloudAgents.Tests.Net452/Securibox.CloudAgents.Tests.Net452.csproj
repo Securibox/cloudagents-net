@@ -72,6 +72,7 @@
     <Compile Include="Documents\Constants.cs" />
     <Compile Include="Documents\BasicAuthenticationTests.cs" />
     <Compile Include="Documents\JwtClientTests.cs" />
+    <Compile Include="Documents\WebView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
