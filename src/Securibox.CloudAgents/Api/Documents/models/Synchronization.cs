@@ -13,6 +13,10 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// </summary>
         public int AccountId { get; set; }
         /// <summary>
+        /// The customer user identifier.
+        /// </summary>
+        public string CustomerUserId { get; set; }
+        /// <summary>
         /// The customer account identifier.
         /// </summary>
         public string CustomerAccountId { get; set; }

@@ -33,6 +33,10 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// </summary>
         public int AgentId { get; set; }
         /// <summary>
+        /// The agent identifier that downloaded the document.
+        /// </summary>
+        public int AgentIdentifier { get; set; }
+        /// <summary>
         /// The digest of the document content
         /// </summary>
         public string ContentHash { get; set; }
