@@ -35,7 +35,7 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// <summary>
         /// The agent identifier that downloaded the document.
         /// </summary>
-        public int AgentIdentifier { get; set; }
+        public string AgentIdentifier { get; set; }
         /// <summary>
         /// The digest of the document content
         /// </summary>
