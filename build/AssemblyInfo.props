@@ -1,0 +1,11 @@
+<Project>
+
+	<PropertyGroup>
+		<MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+		<GenerateAssemblyInfo Condition="'$(GenerateAssemblyInfo)' == ''">True</GenerateAssemblyInfo>
+		<AssemblyTitle Condition="'$(AssemblyTitle)' == ''">$(MSBuildProjectName)</AssemblyTitle>
+		<Product Condition="'$(Product)' == ''">Securibox Cloud Agents</Product>
+		<Company Condition="'$(Company)' == ''">Securibox</Company>
+	</PropertyGroup>
+
+</Project>
