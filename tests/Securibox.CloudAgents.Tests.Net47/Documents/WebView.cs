@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Securibox.CloudAgents.Tests.Net452.Documents
+namespace Securibox.CloudAgents.Tests.Net47.Documents
 {
     [TestClass]
     public class WebView

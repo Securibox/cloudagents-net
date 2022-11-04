@@ -1,4 +1,4 @@
-﻿namespace Securibox.CloudAgents.Tests.Net452.Documents
+﻿namespace Securibox.CloudAgents.Tests.Net47.Documents
 {
     class Constants
     {

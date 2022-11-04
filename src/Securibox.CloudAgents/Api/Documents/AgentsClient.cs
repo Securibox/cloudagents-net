@@ -26,12 +26,14 @@ namespace Securibox.CloudAgents.Api.Documents
         /// </summary>
         /// <param name="culture">he culture of the returned information.</param>
         /// <param name="includeLogo">Specifies if the response should include the agents logo in base64 enconding.</param>
+        /// <param name="includeDisabledAgents">Specifies if the response should include the agents that are disabled.</param>
         /// <returns></returns>
-        public List<Agent> ListAgents(string culture = null, bool includeLogo = false)
+        public List<Agent> ListAgents(string culture = null, bool includeLogo = false, bool includeDisabledAgents = false)
         {
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}", _apiVersion, _path));
             requestUri = requestUri.AddQueryParameter("culture", culture);
             requestUri = requestUri.AddQueryParameter("includeLogo", includeLogo);
+            requestUri = requestUri.AddQueryParameter("includeDisabledAgents", includeDisabledAgents);
 
             var response = _authenticatedClient.HttpClient.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Agent>>();
@@ -43,8 +45,9 @@ namespace Securibox.CloudAgents.Api.Documents
         /// <param name="culture">The culture of the returned information.</param>
         /// <param name="includeLogo">Specifies if the response should include the agents logo encoded in base 64.</param>
         /// <param name="q">The query string that will filter agents starting with the defined prefix</param>
+        /// <param name="includeDisabledAgents">Specifies if the response should include the agents that are disabled.</param>
         /// <returns>A list of agents.</returns>
-        public List<Agent> SearchAgent(AgentCountryCode? countryCode = null, string culture = null, bool includeLogo = false, string q = null)
+        public List<Agent> SearchAgent(AgentCountryCode? countryCode = null, string culture = null, bool includeLogo = false, string q = null, bool includeDisabledAgents = false)
         {
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/search", _apiVersion, _path));
             if (countryCode != null)
@@ -55,6 +58,7 @@ namespace Securibox.CloudAgents.Api.Documents
             requestUri = requestUri.AddQueryParameter("includeLogo", includeLogo);
             requestUri = requestUri.AddQueryParameter("culture", culture);
             requestUri = requestUri.AddQueryParameter("q", q);
+            requestUri = requestUri.AddQueryParameter("includeDisabledAgents", includeDisabledAgents);
 
             var response = _authenticatedClient.HttpClient.ApiGet(requestUri);
             return response.GetObjectFromResponse<List<Agent>>();

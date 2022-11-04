@@ -5,10 +5,11 @@ using Securibox.CloudAgents.Core.AuthConfigs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Securibox.CloudAgents.Tests.Net452.Documents
+namespace Securibox.CloudAgents.Tests.Net47.Documents
 {
     [TestClass]
     public class CertificateClientTests
@@ -18,14 +19,33 @@ namespace Securibox.CloudAgents.Tests.Net452.Documents
         public CertificateClientTests()
         {
             CertAuthConfig authConfig = new CertAuthConfig("[CertificateThumbprint]");
-            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
+            _apiClient = new ApiClient("https://sca-multitenant-prod.securibox.eu", authConfig);
         }
 
         [TestMethod]
         public void GetAgentsListTest()
         {
-            var agents = _apiClient.AgentsClient.ListAgents();
-            Assert.IsTrue(agents != null && agents.Count > 0);
+            int errors = 0;
+            int success = 0;
+
+            for(int i = 0; i < 1000; i++)
+            {
+                try
+                {
+                    var agents = _apiClient.AgentsClient.ListAgents();
+                    success++;
+
+                }
+                catch
+                {
+                    errors++;
+                }
+            }
+
+
+            //System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
+            //var agents = _apiClient.AgentsClient.ListAgents();
+            //Assert.IsTrue(agents != null && agents.Count > 0);
         }
 
         [TestMethod]

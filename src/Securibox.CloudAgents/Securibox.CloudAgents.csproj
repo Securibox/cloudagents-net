@@ -3,7 +3,7 @@
   <Import Project="$(BuildDirectory)AssemblyInfo.props" />
   
   <PropertyGroup>
-    <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Securibox.CloudAgents</AssemblyName>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>portable</DebugType>
@@ -18,34 +18,23 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/Securibox/cloudagents-net</RepositoryUrl>
     <Description>A C# client library for the Securibox Cloud Agents API (https://sca.securibox.eu)</Description>
-    <Version>0.1.8</Version>
-    <Copyright>Securibox ©  2021</Copyright>
+    <Version>0.1.9</Version>
+    <Copyright>Securibox ©  2022</Copyright>
     <PackageIcon>sca-icon.png</PackageIcon>
     <PackageProjectUrl>https://www.securibox.eu/sca</PackageProjectUrl>
     <PackageTags>Securibox Cloud Agents;CloudAgents;SCA</PackageTags>
     <PackageReleaseNotes />
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <AssemblyVersion>0.1.8.0</AssemblyVersion>
-    <FileVersion>0.1.8.0</FileVersion>
+    <AssemblyVersion>0.1.9.0</AssemblyVersion>
+    <FileVersion>0.1.9.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.6.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
     <None Include="..\..\sca-icon.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>4.6.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net452'">
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\LICENSE.txt">

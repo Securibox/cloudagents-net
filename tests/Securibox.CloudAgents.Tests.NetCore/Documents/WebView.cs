@@ -16,6 +16,7 @@ namespace Securibox.CloudAgents.Tests.NetCore.Documents
 
             var token = Securibox.CloudAgents.Core.Utils.BuildWebViewDefaultToken(cert, "customer1234");
             string webViewUrl = $"https://sca-webview.azurewebsites.net?token={token}&callback=https://www.myapp.com&state=customerData";
+            string webViewUrl2 = $"https://sca-webview-staging.azureedge.net/index.html?token={token}";
         }
     }
 }

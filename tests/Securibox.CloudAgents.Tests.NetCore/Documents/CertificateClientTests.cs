@@ -14,7 +14,7 @@ namespace Securibox.CloudAgents.Tests.NetCore.Documents
         public CertificateClientTests()
         {
             CertAuthConfig authConfig = new CertAuthConfig("[CertificateThumbprint]");
-            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
+            _apiClient = new ApiClient("https://sca-multitenant-prod.securibox.eu", authConfig);
         }
 
         [TestMethod]

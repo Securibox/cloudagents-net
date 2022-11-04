@@ -4,7 +4,7 @@ using Securibox.CloudAgents.Api.Documents.Models;
 using Securibox.CloudAgents.Core.AuthConfigs;
 using System.Collections.Generic;
 
-namespace Securibox.CloudAgents.Tests.Net452.Documents
+namespace Securibox.CloudAgents.Tests.Net47.Documents
 {
     [TestClass]
     public class JwtClientTests
