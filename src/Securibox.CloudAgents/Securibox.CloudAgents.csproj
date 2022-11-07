@@ -23,7 +23,7 @@
     <PackageIcon>sca-icon.png</PackageIcon>
     <PackageProjectUrl>https://www.securibox.eu/sca</PackageProjectUrl>
     <PackageTags>Securibox Cloud Agents;CloudAgents;SCA</PackageTags>
-    <PackageReleaseNotes />
+    <PackageReleaseNotes>Removed support for .NET 4.5.2, changed license to MIT and added ability to list disabled agents.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <AssemblyVersion>0.1.9.0</AssemblyVersion>
     <FileVersion>0.1.9.0</FileVersion>
