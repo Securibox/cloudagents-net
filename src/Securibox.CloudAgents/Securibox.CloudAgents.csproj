@@ -3,7 +3,7 @@
   <Import Project="$(BuildDirectory)AssemblyInfo.props" />
   
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <AssemblyName>Securibox.CloudAgents</AssemblyName>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>portable</DebugType>
@@ -18,18 +18,19 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/Securibox/cloudagents-net</RepositoryUrl>
     <Description>A C# client library for the Securibox Cloud Agents API (https://sca.securibox.eu)</Description>
-    <Version>0.1.9</Version>
+    <Version>0.1.10-alpha</Version>
     <Copyright>Securibox ©  2022</Copyright>
     <PackageIcon>sca-icon.png</PackageIcon>
     <PackageProjectUrl>https://www.securibox.eu/sca</PackageProjectUrl>
     <PackageTags>Securibox Cloud Agents;CloudAgents;SCA</PackageTags>
     <PackageReleaseNotes>Removed support for .NET 4.5.2, changed license to MIT and added ability to list disabled agents.</PackageReleaseNotes>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <AssemblyVersion>0.1.9.0</AssemblyVersion>
-    <FileVersion>0.1.9.0</FileVersion>
+    <AssemblyVersion>0.1.10.0</AssemblyVersion>
+    <FileVersion>0.1.10.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />

@@ -98,12 +98,25 @@ namespace Securibox.CloudAgents.Api.Documents
         {
 
         }
+
+        /// <summary>
+        /// Initializes the SCA Documents wrapper using a provided SCA base address and a authentication configuration.
+        /// </summary>
+        /// <param name="baseAddress">The SCA platform base address in string format</param>
+        /// <param name="authConfig">An authentication configuration</param>
+        /// <param name="forceTls12">If set to true, forces the client to communicate with SCA using the TLS 1.2 protocol.</param>
+        public ApiClient(string baseAddress, AuthClientConfig authConfig, bool forceTls12 = false) : base(baseAddress, authConfig, forceTls12)
+        {
+
+        }
+
         /// <summary>
         /// Initializes the SCA Documents wrapper using a provided SCA base address and a authentication configuration.
         /// </summary>
         /// <param name="baseUri">The SCA platform base address in uri format</param>
         /// <param name="authConfig">An authentication configuration</param>
-        public ApiClient(Uri baseUri, AuthClientConfig authConfig): base(baseUri, authConfig) { }
+        /// <param name="forceTls12">If set to true, forces the client to communicate with SCA using the TLS 1.2 protocol.</param>
+        public ApiClient(Uri baseUri, AuthClientConfig authConfig, bool forceTls12 = false) : base(baseUri, authConfig, forceTls12) { }
         /// <summary>
         /// Initializes the SCA Documents wrapper from the web.config configuration
         /// </summary>

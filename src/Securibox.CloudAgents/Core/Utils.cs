@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Claims;
-using System.Web;
-//using System.IdentityModel.Tokens;
+using System.Net.Http;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 
@@ -112,7 +111,7 @@ namespace Securibox.CloudAgents.Core
             if (paramValue != null)
             {
                 var uriBuilder = new UriBuilder(url);
-                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                var query = uriBuilder.Uri.ParseQueryString();
                 query[paramName] = paramValue is string ? paramValue as string : paramValue.ToString();
                 uriBuilder.Query = query.ToString();
                 return new Uri(uriBuilder.ToString());

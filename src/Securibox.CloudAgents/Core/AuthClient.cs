@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
+﻿using Securibox.CloudAgents.Configurations;
 using Securibox.CloudAgents.Core.AuthConfigs;
-using Securibox.CloudAgents.Configurations;
+using System;
+using System.Linq;
+using System.Net;
 
 namespace Securibox.CloudAgents.Core
 {
@@ -43,21 +43,29 @@ namespace Securibox.CloudAgents.Core
         /// </summary>
         /// <param name="baseAddress">The base address.</param>
         /// <param name="authConfig">The authentication configuration.</param>
-        public AuthClient(string baseAddress, AuthClientConfig authConfig)
+        /// <param name="forceTls12">If set to true, forces the client to communicate with SCA using the TLS 1.2 protocol.</param>
+        public AuthClient(string baseAddress, AuthClientConfig authConfig, bool forceTls12 = false)
+            : this(new Uri(baseAddress), authConfig, forceTls12)
         {
-            if (string.IsNullOrEmpty(baseAddress))
-                throw new ArgumentNullException("Invalid base address.");
-            if (authConfig == null)
-                throw new ArgumentNullException("Invalid AuthClientConfig.");
-            _authConfig = authConfig;
-            _baseUri = new Uri(baseAddress.EndsWith("/") ? baseAddress : baseAddress + "/");
+            //if (string.IsNullOrEmpty(baseAddress))
+            //    throw new ArgumentNullException("Invalid base address.");
+            //if (authConfig == null)
+            //    throw new ArgumentNullException("Invalid AuthClientConfig.");
+            //_authConfig = authConfig;
+            //_baseUri = new Uri(baseAddress.EndsWith("/") ? baseAddress : baseAddress + "/");
+
+            //if (forceTls12)
+            //{
+            //    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            //}
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthClient"/> class.
         /// </summary>
         /// <param name="baseUri">The base URI.</param>
         /// <param name="authConfig">The authentication configuration.</param>
-        public AuthClient(Uri baseUri, AuthClientConfig authConfig)
+        /// <param name="forceTls12">If set to true, forces the client to communicate with SCA using the TLS 1.2 protocol.</param>
+        public AuthClient(Uri baseUri, AuthClientConfig authConfig, bool forceTls12 = false)
         {
             if (baseUri == null)
                 throw new ArgumentNullException("Invalid base uri.");
@@ -66,6 +74,11 @@ namespace Securibox.CloudAgents.Core
 
             _authConfig = authConfig;
             _baseUri = baseUri;
+
+            if (forceTls12)
+            {
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3;
+            }
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthClient"/> class.
