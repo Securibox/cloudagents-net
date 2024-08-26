@@ -8,6 +8,7 @@ namespace Securibox.CloudAgents.Api.Banks
     /// <summary>
     /// Wrapper for the bank related methods.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class BanksClient : ApiObjectClient
     {
         private readonly string _path = "banks";

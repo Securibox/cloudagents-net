@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// Enumeration specifying the type of values expected by this field.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public enum FieldValueType
     {
         /// <summary>

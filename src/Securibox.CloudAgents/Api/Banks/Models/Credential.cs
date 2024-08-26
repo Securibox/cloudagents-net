@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// A class representing an agent account credential.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class Credential
     {
         /// <summary>

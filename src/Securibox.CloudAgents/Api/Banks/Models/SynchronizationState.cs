@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// An enumeration detailling the overall state of a synchronization.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public enum SynchronizationState
     {
         /// <summary>

@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// Object representing a bank agent.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class Bank
     {
         /// <summary>

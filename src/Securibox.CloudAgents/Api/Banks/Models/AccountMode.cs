@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Securibox.CloudAgents.Api.Banks.Serializers;
+using System;
 
 namespace Securibox.CloudAgents.Api.Banks.Models
 {
@@ -7,6 +8,7 @@ namespace Securibox.CloudAgents.Api.Banks.Models
     /// The account working mode.
     /// </summary>
     [JsonConverter(typeof(AccountModeSerializer))]
+    [Obsolete("This class is deprecated.")]
     public enum AccountMode
     {
         /// <summary>

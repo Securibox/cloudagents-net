@@ -5,8 +5,10 @@ using System;
 namespace Securibox.CloudAgents.Api.Banks
 {
     /// <summary>
+    /// [Obsolete("This class is deprecated.")]
     /// Wrapper for the bank accounts related methods.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class BankAccountsClient : ApiObjectClient
     {
         private readonly string _path = "bankaccounts";

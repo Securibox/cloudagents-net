@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// The transaction types.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public enum TransactionType
     {
         /// <summary>
