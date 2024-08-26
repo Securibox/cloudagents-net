@@ -8,34 +8,38 @@
         /// <summary>
         /// The synchronization has just been created after an account creation.
         /// </summary>
-        NewAccount,
+        NewAccount = 0,
         /// <summary>
         /// The synchronization has just been created.
         /// </summary>
-        Created,
+        Created = 1,
         /// <summary>
         /// The synchronization is running.
         /// </summary>
-        Running,
+        Running = 2,
         /// <summary>
-        /// The synchronization has failed dued to an agent issue. Please check SynchronizationStateDetails for more information.
+        /// The synchronization is finished and the documents are ready to be delivered.
         /// </summary>
-        AgentFailed,
+        ToDeliver = 3,
         /// <summary>
         /// The synchronization is finished and the documents are being delivered.
         /// </summary>
-        Delivering,
+        Delivering = 4,
         /// <summary>
         /// The synchronization is finished, the documents have been delivered and SCA is expecting the client to acknowledge the documents reception.
         /// </summary>
-        PendingAcknowledgement,
+        PendingAcknowledgement = 5,
         /// <summary>
         /// The synchronization is completed (documents have been delivered and acknwoledged by the client).
         /// </summary>
-        Completed,
+        Completed = 6,
         /// <summary>
         /// The synchronization is completed but the synchronization report has failed to be delivered.
         /// </summary>
-        ReportFailed
+        ReportFailed = 7,
+        /// <summary>
+        /// The synchronization is completed but the client has not acknowledged the reception of the documents passed the allowed amount of time.
+        /// </summary>
+        NotAck = 8,
     }
 }
