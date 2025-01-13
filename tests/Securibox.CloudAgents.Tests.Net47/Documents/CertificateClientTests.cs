@@ -4,10 +4,6 @@ using Securibox.CloudAgents.Api.Documents.Models;
 using Securibox.CloudAgents.Core.AuthConfigs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.Tests.Net47.Documents
 {
@@ -23,33 +19,21 @@ namespace Securibox.CloudAgents.Tests.Net47.Documents
         }
 
         [TestMethod]
-        public void GetAgentsListTest()
+        public void Test_0001_GetNonExistingAgentByIdTest()
         {
-            int errors = 0;
-            int success = 0;
-
-            for(int i = 0; i < 1000; i++)
-            {
-                try
-                {
-                    var agents = _apiClient.AgentsClient.ListAgents();
-                    success++;
-
-                }
-                catch
-                {
-                    errors++;
-                }
-            }
-
-
-            //System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
-            //var agents = _apiClient.AgentsClient.ListAgents();
-            //Assert.IsTrue(agents != null && agents.Count > 0);
+            var agent = _apiClient.AgentsClient.GetAgentByIdentifier("11c1076a4554403786058c5a07a4a973");
+            Assert.IsTrue(agent == null);
         }
 
         [TestMethod]
-        public void SearchAgentsTest()
+        public void Test_0010_GetAgentsListTest()
+        {
+            var agents = _apiClient.AgentsClient.ListAgents();
+            Assert.IsTrue(agents != null && agents.Count > 0);
+        }
+
+        [TestMethod]
+        public void Test_0020_SearchAgentsTest()
         {
             var agents = _apiClient.AgentsClient.SearchAgent(AgentCountryCode.FR);
             Assert.IsTrue(agents != null && agents.Count > 0);
@@ -59,17 +43,19 @@ namespace Securibox.CloudAgents.Tests.Net47.Documents
             Assert.IsTrue(agents != null && agents.Count > 0);
             agents = _apiClient.AgentsClient.SearchAgent(null, null, false, "Non-existant agent name");
             Assert.IsTrue(agents == null || agents.Count == 0);
+            agents = _apiClient.AgentsClient.SearchAgent(AgentCountryCode.AD);
+            Assert.IsTrue(agents != null && agents.Count == 0);
         }
 
         [TestMethod]
-        public void GetCategoriesListTest()
+        public void Test_0030_GetCategoriesListTest()
         {
             var categories = _apiClient.CategoriesClient.ListCategories();
             Assert.IsTrue(categories != null && categories.Count > 0);
         }
 
         [TestMethod]
-        public void GetCategoriesAndListAgentsByCategoryTest()
+        public void Test_0040_GetCategoriesAndListAgentsByCategoryTest()
         {
             var categories = _apiClient.CategoriesClient.ListCategories();
             Assert.IsTrue(categories != null && categories.Count > 0);
@@ -81,7 +67,7 @@ namespace Securibox.CloudAgents.Tests.Net47.Documents
         }
 
         [TestMethod]
-        public void CreateAccountAndSynchronizeTest()
+        public void Test_0050_CreateAccountAndSynchronizeTest()
         {
             var credentials = new List<Credential>
                 {
@@ -115,7 +101,26 @@ namespace Securibox.CloudAgents.Tests.Net47.Documents
         }
 
         [TestMethod]
-        public void DeleteAccountTest()
+        public void Test_0060_DownloadDocument()
+        {
+            var documents = _apiClient.DocumentsClient.SearchDocuments(Constants.CustomerAccountId);
+            foreach (var document in documents)
+            {
+                byte[] documentContent = Convert.FromBase64String(document.Base64Content);
+                System.IO.File.WriteAllBytes(@"C:\Temp\" + document.Name, documentContent);
+                _apiClient.DocumentsClient.AcknowledgeDocumentDelivery(document.Id);
+            }
+        }
+
+        [TestMethod]
+        public void Test_0070_AcknowledgeSynchTest()
+        {
+            var synchAcknowledgement = _apiClient.SynchronizationsClient.AcknowledgeSynchronizationDelivery(Constants.CustomerAccountId, new int[] { }, new int[] { });
+            Assert.IsTrue(synchAcknowledgement);
+        }
+
+        [TestMethod]
+        public void Test_0080_DeleteAccountTest()
         {
             _apiClient.AccountsClient.DeleteAccount(Constants.CustomerAccountId);
 

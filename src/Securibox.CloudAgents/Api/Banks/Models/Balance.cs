@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// The balace of an account or a credit card.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class Balance
     {
         /// <summary>

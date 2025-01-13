@@ -7,6 +7,7 @@ namespace Securibox.CloudAgents.Api.Banks
     /// <summary>
     /// Wrapper for the Synchronizations related methods.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class SynchronizationsClient : ApiObjectClient
     {
         private readonly string _path = "synchronizations";

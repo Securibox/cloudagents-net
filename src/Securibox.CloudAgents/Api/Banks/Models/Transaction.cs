@@ -5,6 +5,7 @@ namespace Securibox.CloudAgents.Api.Banks.Models
     /// <summary>
     /// Object representing a bank operation (credit or debit).
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class Transaction
     {
         /// <summary>

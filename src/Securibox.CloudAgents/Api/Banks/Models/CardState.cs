@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// Card statuses
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public enum CardState
     {
         /// <summary>

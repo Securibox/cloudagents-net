@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Securibox.CloudAgents.Api.Banks.Serializers
 {
+    [Obsolete("This class is deprecated.")]
     class CurrencySerializer : JsonConverter
     {
         public override bool CanConvert(Type objectType)

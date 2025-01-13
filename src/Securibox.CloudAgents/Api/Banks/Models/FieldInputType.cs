@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// Enumeration specifying the type of inputs that could be used to ask for the field value.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public enum FieldInputType
     {
         /// <summary>

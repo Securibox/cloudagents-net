@@ -1,8 +1,11 @@
-﻿namespace Securibox.CloudAgents.Api.Banks.Models
+﻿using System;
+
+namespace Securibox.CloudAgents.Api.Banks.Models
 {
     /// <summary>
     /// A class representing an agent login field.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class Field
     {
         /// <summary>

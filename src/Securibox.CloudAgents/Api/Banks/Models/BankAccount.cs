@@ -6,6 +6,7 @@ namespace Securibox.CloudAgents.Api.Banks.Models
     /// <summary>
     /// Represents a bank account
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class BankAccount
     {
         /// <summary>

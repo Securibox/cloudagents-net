@@ -1,12 +1,15 @@
 ﻿using Securibox.CloudAgents.Core;
 using Securibox.CloudAgents.Core.AuthConfigs;
 using System;
+using System.Diagnostics;
 
 namespace Securibox.CloudAgents.Api.Banks
 {
     /// <summary>
+    /// [Obsolete("This class is deprecated.")]
     /// Class wrapping the SCA REST APIs for the bank accounts aggregation.
     /// </summary>
+    [Obsolete("This class is deprecated.")]
     public class ApiClient : AuthClient
     {
         #region Private Properties
