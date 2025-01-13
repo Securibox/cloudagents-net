@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Securibox.CloudAgents.Core
+﻿namespace Securibox.CloudAgents.Core
 {
     /// <summary>
     /// Abstract class to call each API method group.

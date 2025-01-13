@@ -72,5 +72,20 @@ namespace Securibox.CloudAgents.Api.Documents.Models
         /// A list of documents downloaded through this synchronization.
         /// </summary>
         public List<Document> Documents { get; set; }
+        /// <summary>
+        /// Gets or sets the agent identifier.
+        /// </summary>
+        /// <value>
+        /// The account identifier.
+        /// </value>
+        public int AgentId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the agent identifier.
+        /// </summary>
+        /// <value>
+        /// The account identifier.
+        /// </value>
+        public string AgentIdentifier { get; set; }
     }
 }
