@@ -122,7 +122,7 @@
         /// <summary>
         /// The identity provider (such as France Connect) is not linked to the account
         /// </summary>
-        IdentityProviderNotLinkedToAccount = 28,
+        IdProviderNotLinkedToAccount = 28,
         /// <summary>
         /// User validation request sent through an app or website for MFA
         /// </summary>
@@ -138,10 +138,10 @@
         /// <summary>
         /// The synchronization has been blocked by a website protection service
         /// </summary>
-        BlockedByWebsiteProtectionService = 32,
+        BlockedByProtectionService = 32,
         /// <summary>
-        /// Additional authentication is required but not in tha case of a multi-factor authentication
+        /// The synchronization context has expired, meaning the session for the synchronization is no longer valid.
         /// </summary>
-        AdditionalAuthenticationRequiredNotMFA = 33,
+        ContextExpired = 33,
     }
 }

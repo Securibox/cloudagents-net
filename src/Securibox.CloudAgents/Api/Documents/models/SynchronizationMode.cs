@@ -16,6 +16,10 @@
         /// <summary>
         /// Synchronization launched automatically by the Cloud Agents platform.
         /// </summary>
-        Automatic
+        Automatic,
+        /// <summary>
+        /// Synchronization launched by an administrator.
+        /// </summary>
+        Admin
     }
 }

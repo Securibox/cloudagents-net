@@ -41,5 +41,9 @@
         /// The synchronization is completed but the client has not acknowledged the reception of the documents passed the allowed amount of time.
         /// </summary>
         NotAck = 8,
+        /// <summary>
+        /// The synchronization is blocked for maintenance.
+        /// </summary>
+        Blocked = 9,
     }
 }
