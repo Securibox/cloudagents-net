@@ -15,7 +15,7 @@ namespace Securibox.CloudAgents.Tests.Net47.Documents
         public JwtClientTests()
         {
             JWTAuthConfig authConfig = new JWTAuthConfig("");
-            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
+            _apiClient = new ApiClient("http://localhost:8080/api/v1", authConfig);
         }
 
         [TestMethod]

@@ -15,8 +15,8 @@ namespace Securibox.CloudAgents.Tests.NetCore.Documents
 
         public BasicAuthenticationTests()
         {
-            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[Username]", "[Password]");
-            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", basicAuthConfig);
+            BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[UserName]", "[Password]");
+            _apiClient = new ApiClient("http://localhost:8080/api/v1", basicAuthConfig);
         }
 
         [TestMethod()]
