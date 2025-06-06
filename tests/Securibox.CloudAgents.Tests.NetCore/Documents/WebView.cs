@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NUnit.Framework;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Securibox.CloudAgents.Tests.NetCore.Documents
 {
-    [TestClass]
     public class WebView
     {
-        [TestMethod]
-        public void GetWebViewLink()
+        [Test, Order(0001), NonParallelizable]
+        public void Test_0001_GetWebViewLink()
         {
             X509Certificate2 cert = new X509Certificate2(@"C:\Path\To\PfxFile", "[Pfx Password]");
 
