@@ -17,7 +17,7 @@ namespace Securibox.CloudAgents.Tests.NetCore.Documents
         {
             X509Certificate2 cert = new X509Certificate2(@"C:\Path\To\PfxFile", "[Pfx Password]");
             JWTAuthConfig authConfig = new JWTAuthConfig(cert);
-            _apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
+            _apiClient = new ApiClient("http://localhost:8080/api/v1", authConfig);
         }
 
         [TestMethod]

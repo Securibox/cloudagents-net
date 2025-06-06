@@ -20,8 +20,12 @@ namespace Securibox.CloudAgents.Core.AuthConfigs
         private HttpClientHandler _handler;
 #endif
 
-
-        private CertAuthConfig(X509Certificate2 certificate)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CertAuthConfig"/> class.
+        /// </summary>
+        /// <param name="certificate">The client certificate used for authentication.</param>
+        /// <exception cref="ArgumentException">Thrown when the provided certificate is null or invalid.</exception>
+        public CertAuthConfig(X509Certificate2 certificate)
         {
             if (certificate == null)
                 throw new ArgumentException("invalid certificate", "certificate");

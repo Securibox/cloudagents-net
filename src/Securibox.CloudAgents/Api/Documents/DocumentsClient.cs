@@ -61,10 +61,17 @@ namespace Securibox.CloudAgents.Api.Documents
         /// Acknowledges the document delivery.
         /// </summary>
         /// <param name="id">The document identifier.</param>
+        /// <param name="refused">Specifies if the document delivery is refused.</param>
+        /// <param name="failed">Specifies if the document delivery has failed.</param>
         /// <returns>true if the acknowledgment is successfull, false otherwise.</returns>
-        public bool AcknowledgeDocumentDelivery(int id)
+        public bool AcknowledgeDocumentDelivery(int id, bool refused = false, bool failed = false)
         {
+            if (refused && failed)
+                throw new ArgumentException("You cannot refuse and fail a document delivery at the same time.");
+            
             var requestUri = new Uri(_authenticatedClient.BaseUri, string.Format("api/{0}/{1}/{2}/ack", _apiVersion, _path, id));
+            requestUri = requestUri.AddQueryParameter("refused", refused);
+            requestUri = requestUri.AddQueryParameter("failed", failed);
             var response = _authenticatedClient.HttpClient.ApiPut(requestUri, Newtonsoft.Json.JsonConvert.SerializeObject(id));
             return response.GetObjectFromResponse<bool>();
         }

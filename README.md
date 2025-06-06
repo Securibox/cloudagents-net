@@ -22,7 +22,7 @@ Basic API authentication is the easiest of the three to implement offering the l
 This mechanism is usually advised for testing purposes in order to test the APIs and only requires Securibox to provide a username and password.
 ```csharp
 BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
-ApiClient apiClient = new ApiClient("https://sca-multitenant.securibox.eu", basicAuthConfig);
+ApiClient apiClient = new ApiClient("[baseUrl]", basicAuthConfig);
 ```
 Or configuring in the app.config file:
 ```xml
@@ -30,7 +30,7 @@ Or configuring in the app.config file:
   <configSections>
     <section name="SecuriboxCloudAgentsConfiguration" type="Securibox.CloudAgents.Configurations.SecuriboxCloudAgentsConfiguration, Securibox.CloudAgents"/>
   </configSections>
-  <SecuriboxCloudAgentsConfiguration authMode="basic" baseAddress="https://sca-multitenant.securibox.eu/" username="username" password="password"/>
+  <SecuriboxCloudAgentsConfiguration authMode="basic" baseAddress="baseUrl" username="username" password="password"/>
 </configuration>
 ```
 ### SSL Client Certificate Authentication 
@@ -42,7 +42,7 @@ In order to use this type of authentication, Securibox will provide a PFX certif
 The SDK can access the certificate store to perform client authentication:
 ```csharp
 CertAuthConfig authConfig = new CertAuthConfig("[CertificateThumbprint]");
-ApiClient apiClient = new ApiClient("https://sca-multitenant.securibox.eu", authConfig);
+ApiClient apiClient = new ApiClient("[baseUrl]", authConfig);
 ```
 Or configuring in the app.config file:
 ```xml
@@ -50,7 +50,7 @@ Or configuring in the app.config file:
   <configSections>
     <section name="SecuriboxCloudAgentsConfiguration" type="Securibox.CloudAgents.Configurations.SecuriboxCloudAgentsConfiguration, Securibox.CloudAgents"/>
   </configSections>
-  <SecuriboxCloudAgentsConfiguration authMode="cert" baseAddress="https://sca-multitenant.securibox.eu/" certThumbprint="[CertificateThumbprint]" />
+  <SecuriboxCloudAgentsConfiguration authMode="cert" baseAddress="baseUrl" certThumbprint="[CertificateThumbprint]" />
 </configuration>
 ```
 
@@ -58,7 +58,7 @@ Or configuring in the app.config file:
 The following is the minimum needed code to list all agent details and fields:
 ```csharp
 BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
-ApiClient apiClient = new ApiClient("https://sca-multitenant.securibox.eu", basicAuthConfig);
+ApiClient apiClient = new ApiClient("[baseUrl]", basicAuthConfig);
 var agents = apiClient.AgentsClient.ListAgents();
 foreach(var agent in agents){
     Console.WriteLine("\n\n\n------ Agent Details ------\n");
@@ -93,7 +93,7 @@ var apiAccount = new Account
 
 //Setup API authentication (basic) and client
 BasicAuthConfig basicAuthConfig = new BasicAuthConfig("[BasicUsername]", "[BasicPassword]");
-ApiClient apiClient = new ApiClient("https://sca-multitenant.securibox.eu", basicAuthConfig);
+ApiClient apiClient = new ApiClient("[baseUrl]", basicAuthConfig);
 
 //Create the account which automatically launches a synchronization
 var account = apiClient.AccountsClient.CreateAccount(apiAccount, true);

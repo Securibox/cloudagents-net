@@ -32,7 +32,19 @@
         /// <summary>
         /// The document has been not been delivered successfully.
         /// </summary>
-        DeliveryFailed
+        DeliveryFailed,
+        /// <summary>
+        /// The document is still holding in the queue and has not been processed yet.
+        /// </summary>
+        Holding,
+        /// <summary>
+        /// The document is being parsed.
+        /// </summary>
+        Parsing,
+        /// <summary>
+        /// The document will be pack.
+        /// </summary>
+        ToPack
     }
 }
 
