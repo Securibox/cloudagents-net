@@ -1,0 +1,80 @@
+# .NET Core Function App to Windows on Azure
+# Build a .NET Core function app and deploy it to Azure as a Windows function App.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/dotnet-core
+trigger: none
+
+name: Securibox.CloudAgents-dev
+
+variables:
+  - group: SigningConfig
+  - name: vmImageName
+    value: 'windows-latest'
+  - name: workingDirectory
+    value : '$(System.DefaultWorkingDirectory)'
+  - name: functionName
+    value: 'Securibox.CloudAgents'
+  - name: versionNumber
+    value: '0.0.20-beta'
+  - name: publishFeedCredentials
+    value: 'Securibox.CloudAgents.Nuget'
+  
+stages:
+- stage: Build
+  displayName: Build stage
+
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      name: sbx-security-devopspool
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: PowerShell@2
+      displayName: Set the name of the build (i.e. the Build.BuildNumber)
+      inputs:
+        targetType: 'inline'
+        script: |
+          [string] $buildName = "$(versionNumber)_$(Build.SourceBranchName)"
+          Write-Host "Setting the name of the build to '$buildName'."
+          Write-Host "##vso[build.updatebuildnumber]$buildName"  
+
+    - task: NuGetAuthenticate@1
+      displayName: 'Nuget Authenticate'
+
+    - task: VersionDotNetCoreAssemblies@3
+      inputs:
+        Path: '$(workingDirectory)/$(FunctionName)'
+        VersionNumber: '$(versionNumber)'
+        Injectversion: true
+        VersionRegex: '\d+\.\d+\.\d+-beta\'
+        FilenamePattern: '.csproj'
+        OutputVersion: 'OutputedVersion'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore'
+      inputs:
+        command: restore
+        projects: '$(workingDirectory)/$(FunctionName)/*.csproj'
+        vstsFeed: '$(vstsFeed)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build'
+      inputs:      
+        command: 'build'
+        projects: '$(workingDirectory)/$(FunctionName)/*.csproj'
+        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Pack'
+      inputs:
+        command: pack
+        packagesToPack: '$(workingDirectory)/$(FunctionName)/*.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Push'
+      inputs:
+        command: push
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+        publishFeedCredentials: '$(publishFeedCredentials)'
