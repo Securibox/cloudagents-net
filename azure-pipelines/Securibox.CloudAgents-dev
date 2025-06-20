@@ -7,7 +7,6 @@ trigger: none
 name: Securibox.CloudAgents-dev
 
 variables:
-  - group: SigningConfig
   - name: vmImageName
     value: 'windows-latest'
   - name: workingDirectory
@@ -57,7 +56,6 @@ stages:
       inputs:
         command: restore
         projects: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
-        vstsFeed: '$(vstsFeed)'
 
     - task: DotNetCoreCLI@2
       displayName: 'Build'
