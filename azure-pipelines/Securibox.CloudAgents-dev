@@ -45,7 +45,7 @@ stages:
 
     - task: VersionDotNetCoreAssemblies@3
       inputs:
-        Path: '$(workingDirectory)/$(FunctionName)'
+        Path: '$(workingDirectory)/src/$(FunctionName)'
         VersionNumber: '$(versionNumber)'
         Injectversion: true
         VersionRegex: '\d+\.\d+\.\d+-beta\'
@@ -56,21 +56,21 @@ stages:
       displayName: 'Restore'
       inputs:
         command: restore
-        projects: '$(workingDirectory)/$(FunctionName)/*.csproj'
+        projects: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
         vstsFeed: '$(vstsFeed)'
 
     - task: DotNetCoreCLI@2
       displayName: 'Build'
       inputs:      
         command: 'build'
-        projects: '$(workingDirectory)/$(FunctionName)/*.csproj'
+        projects: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
     - task: DotNetCoreCLI@2
       displayName: 'Pack'
       inputs:
         command: pack
-        packagesToPack: '$(workingDirectory)/$(FunctionName)/*.csproj'
+        packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: 'Push'
