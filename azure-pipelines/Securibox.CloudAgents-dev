@@ -14,6 +14,8 @@ variables:
   - name: functionName
     value: 'Securibox.CloudAgents'
   - name: versionNumber
+    value: '0.0.20'
+  - name: packageVersionNumber
     value: '0.0.20-beta'
   - name: publishFeedCredentials
     value: 'Securibox.CloudAgents.Nuget'
@@ -35,7 +37,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          [string] $buildName = "$(versionNumber)_$(Build.SourceBranchName)"
+          [string] $buildName = "$(packageVersionNumber)_$(Build.SourceBranchName)"
           Write-Host "Setting the name of the build to '$buildName'."
           Write-Host "##vso[build.updatebuildnumber]$buildName"  
 
@@ -69,6 +71,7 @@ stages:
       inputs:
         command: pack
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
+        arguments: '/p:PackageVersion=$(packageVersionNumber)'
 
     - task: DotNetCoreCLI@2
       displayName: 'Push'
