@@ -71,7 +71,8 @@ stages:
       inputs:
         command: pack
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
-        arguments: '/p:PackageVersion=$(packageVersionNumber) /p:OutputPath=$(System.DefaultWorkingDirectory)/publish_output /p:NoBuild=true'
+        noBuild: true
+        arguments: '/p:PackageVersion=$(packageVersionNumber)'
 
     - task: DotNetCoreCLI@2
       displayName: 'Push'
