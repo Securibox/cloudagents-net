@@ -71,4 +71,4 @@ stages:
       inputs:
         command: push
         nuGetFeedType: external
-        publishFeedCredentials: '$(Securibox.CloudAgents.Nuget)'
+        publishFeedCredentials: '$(publishFeedCredentials)'
