@@ -7,7 +7,6 @@ trigger: none
 name: Securibox.CloudAgents-dev
 
 variables:
-  - group : Nuget
   - name: vmImageName
     value: 'windows-latest'
   - name: workingDirectory
@@ -18,6 +17,8 @@ variables:
     value: '0.0.20'
   - name: packageVersionNumber
     value: '0.0.20-beta'
+  - name: publishFeedCredentials
+    value: 'Securibox.CloudAgents.Nuget'
   
 stages:
 - stage: Build
@@ -70,5 +71,5 @@ stages:
       inputs:
         command: push
         packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-        nuGetFeedType: external
-    publishFeedCredentials: '$(NugetApiKey)'
+        publishFeedCredentials: '$(publishFeedCredentials)'
+
