@@ -41,15 +41,16 @@ stages:
           [string] $buildName = "$(packageVersionNumber)_$(Build.SourceBranchName)"
           Write-Host "Setting the name of the build to '$buildName'."
           Write-Host "##vso[build.updatebuildnumber]$buildName"  
-    
-    - task: DownloadSecureFile@1
-      name: 'SigningCertificate'
-      displayName: 'Download Code Signing Certificate'
-      inputs:
-        secureFile: 'SigningCertificate.pfx'
 
     - task: NuGetAuthenticate@1
       displayName: 'Nuget Authenticate'
+
+    - task: DotNetCoreCLI@2
+      displayName: Install NuGetKeyVaultSignTool
+      inputs:
+        command: 'custom'
+        custom: 'tool'
+        arguments: 'install --tool-path . NuGetKeyVaultSignTool'
 
     - task: VersionDotNetCoreAssemblies@3
       inputs:
@@ -74,15 +75,18 @@ stages:
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
     
     - task: PowerShell@2
-      displayName: 'Sign'
+      displayName: Running NuGetKeyVaultSign
       inputs:
         targetType: 'inline'
         script: |
           $packagesToSign = '$(System.DefaultWorkingDirectory)/**/*.nupkg'
-          $certificatePath = '$(SigningCertificate.secureFilePath)'
-          $certificatePassword = '$(CertificatePassword)'
           $timestamper = 'https://timestamp.sectigo.com'
-          dotnet nuget sign $packagesToSign --certificate-path $certificatePath --certificate-password $certificatePassword --timestamper $timestamper
+          .\NuGetKeyVaultSignTool sign $packagesToSign --file-digest "sha256" --timestamp-rfc3161 $timestamper --timestamp-digest "sha256" `
+          --azure-key-vault-url "$(azure-key-vault-url)" `
+          --azure-key-vault-tenant-id "$(azure-key-vault-tenant-id)" `
+          --azure-key-vault-client-id "$(azure-key-vault-client-id)" `
+          --azure-key-vault-client-secret "$(azure-key-vault-client-secret)" `
+          --azure-key-vault-certificate "$(azure-key-vault-certificate)"
     
     - task: NuGetCommand@2
       displayName: 'Push'
