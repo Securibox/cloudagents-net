@@ -7,6 +7,7 @@ trigger: none
 name: Securibox.CloudAgents-dev
 
 variables:
+  - group: SigningConfig
   - name: vmImageName
     value: 'windows-latest'
   - name: workingDirectory
@@ -65,6 +66,17 @@ stages:
         command: pack
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+    
+    - task: PowerShell@2
+      displayName: 'Sign'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $packagesToSign = '$(System.DefaultWorkingDirectory)/**/*.nupkg'
+          $certificatePath = '$(SigningCertificate.secureFilePath)'
+          $certificatePassword = '$(CertificatePassword)'
+          $timestamper = 'https://timestamp.sectigo.com'
+          dotnet nuget sign $packagesToSign --certificate-path $certificatePath --certificate-password $certificatePassword --timestamper $timestamper
     
     - task: NuGetCommand@2
       displayName: 'Push'
