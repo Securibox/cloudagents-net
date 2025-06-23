@@ -43,8 +43,6 @@ stages:
 
     - task: NuGetAuthenticate@1
       displayName: 'Nuget Authenticate'
-      inputs:
-        nuGetServiceConnections: $(publishFeedCredentials)
 
     - task: VersionDotNetCoreAssemblies@3
       inputs:
