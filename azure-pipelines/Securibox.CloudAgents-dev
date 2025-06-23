@@ -72,14 +72,14 @@ stages:
       inputs:
         command: pack
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+        arguments: --configuration Release
     
     - task: PowerShell@2
       displayName: Running NuGetKeyVaultSign
       inputs:
         targetType: 'inline'
         script: |
-          $packagesToSign = '$(System.DefaultWorkingDirectory)/**/*.nupkg'
+          $packagesToSign = '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
           $timestamper = 'https://timestamp.sectigo.com'
           .\NuGetKeyVaultSignTool sign $packagesToSign --file-digest "sha256" --timestamp-rfc3161 $timestamper --timestamp-digest "sha256" `
           --azure-key-vault-url "$(azure-key-vault-url)" `
