@@ -65,7 +65,10 @@ stages:
         command: pack
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
-
-    - script: |
-        nuget.exe push -Source "https://api.nuget.org/v3/index.json" -ApiKey az $(System.DefaultWorkingDirectory)\*.nupkg
-      displayName: Push
+    
+    - task: NuGetCommand@2
+      displayName: 'Push'
+      inputs:
+        command: push
+        nuGetFeedType: external
+        publishFeedCredentials: '$(Securibox.CloudAgents.Nuget)'
