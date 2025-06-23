@@ -43,6 +43,8 @@ stages:
 
     - task: NuGetAuthenticate@1
       displayName: 'Nuget Authenticate'
+      inputs:
+        nuGetServiceConnections: $(publishFeedCredentials)
 
     - task: VersionDotNetCoreAssemblies@3
       inputs:
@@ -66,10 +68,7 @@ stages:
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Push'
-      inputs:
-        command: push
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-        publishFeedCredentials: '$(publishFeedCredentials)'
+    - script: |
+      nuget.exe push -Source "https://api.nuget.org/v3/index.json" -ApiKey az $(System.DefaultWorkingDirectory)\*.nupkg
+      displayName: Push
 
