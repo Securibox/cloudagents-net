@@ -41,6 +41,12 @@ stages:
           [string] $buildName = "$(packageVersionNumber)_$(Build.SourceBranchName)"
           Write-Host "Setting the name of the build to '$buildName'."
           Write-Host "##vso[build.updatebuildnumber]$buildName"  
+    
+    - task: DownloadSecureFile@1
+      name: 'SigningCertificate'
+      displayName: 'Download Code Signing Certificate'
+      inputs:
+        secureFile: 'SigningCertificate.pfx'
 
     - task: NuGetAuthenticate@1
       displayName: 'Nuget Authenticate'
