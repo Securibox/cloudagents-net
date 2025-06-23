@@ -44,7 +44,7 @@ stages:
     - task: NuGetAuthenticate@1
       displayName: 'Nuget Authenticate'
       inputs:
-        nuGetServiceConnections: $(publishFeedCredentials)
+        nuGetServiceConnections: '$(publishFeedCredentials)'
 
     - task: VersionDotNetCoreAssemblies@3
       inputs:
@@ -71,4 +71,3 @@ stages:
     - script: |
       nuget.exe push -Source "https://api.nuget.org/v3/index.json" -ApiKey az $(System.DefaultWorkingDirectory)\*.nupkg
       displayName: Push
-
