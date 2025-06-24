@@ -17,7 +17,7 @@ variables:
   - name: versionNumber
     value: '0.0.20-beta'
   - name: publishFeedCredentials
-    value: 'test'
+    value: 'Securibox.CloudAgents.Nuget'
   
 stages:
 - stage: Build
@@ -43,38 +43,52 @@ stages:
     - task: NuGetAuthenticate@1
       displayName: 'Nuget Authenticate'
 
+    - task: DotNetCoreCLI@2
+      displayName: Install NuGetKeyVaultSignTool
+      inputs:
+        command: 'custom'
+        custom: 'tool'
+        arguments: 'install --tool-path . NuGetKeyVaultSignTool'
+
     - task: VersionDotNetCoreAssemblies@3
       inputs:
-        Path: '$(workingDirectory)/$(FunctionName)'
+        Path: '$(workingDirectory)/src/$(FunctionName)'
         VersionNumber: '$(versionNumber)'
+        Field : 'version'
         Injectversion: true
-        VersionRegex: '\d+\.\d+\.\d+-beta\'
         FilenamePattern: '.csproj'
         OutputVersion: 'OutputedVersion'
-
+  
     - task: DotNetCoreCLI@2
       displayName: 'Restore'
       inputs:
         command: restore
-        projects: '$(workingDirectory)/$(FunctionName)/*.csproj'
-        vstsFeed: '$(vstsFeed)'
-
-    - task: DotNetCoreCLI@2
-      displayName: 'Build'
-      inputs:      
-        command: 'build'
-        projects: '$(workingDirectory)/$(FunctionName)/*.csproj'
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+        projects: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
 
     - task: DotNetCoreCLI@2
       displayName: 'Pack'
       inputs:
         command: pack
-        packagesToPack: '$(workingDirectory)/$(FunctionName)/*.csproj'
-
-    - task: DotNetCoreCLI@2
+        packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
+        arguments: '--configuration Release'
+  
+    - task: PowerShell@2
+      displayName: Running NuGetKeyVaultSign
+      inputs:
+        targetType: 'inline'
+        script: |
+          $packagesToSign = '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+          $timestamper = 'https://timestamp.sectigo.com'
+          .\NuGetKeyVaultSignTool sign $packagesToSign --file-digest "sha256" --timestamp-rfc3161 $timestamper --timestamp-digest "sha256" `
+          --azure-key-vault-url "$(azure-key-vault-url)" `
+          --azure-key-vault-tenant-id "$(azure-key-vault-tenant-id)" `
+          --azure-key-vault-client-id "$(azure-key-vault-client-id)" `
+          --azure-key-vault-client-secret "$(azure-key-vault-client-secret)" `
+          --azure-key-vault-certificate "$(azure-key-vault-certificate)"
+    
+    - task: NuGetCommand@2
       displayName: 'Push'
       inputs:
         command: push
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+        nuGetFeedType: external
         publishFeedCredentials: '$(publishFeedCredentials)'
