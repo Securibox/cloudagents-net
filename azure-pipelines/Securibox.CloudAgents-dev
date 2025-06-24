@@ -14,8 +14,6 @@ variables:
     value : '$(System.DefaultWorkingDirectory)'
   - name: functionName
     value: 'Securibox.CloudAgents'
-  - name: assemblyVersion
-    value: '0.0.20'
   - name: versionNumber
     value: '0.0.20-beta'
   - name: publishFeedCredentials
@@ -55,13 +53,12 @@ stages:
     - task: VersionDotNetCoreAssemblies@3
       inputs:
         Path: '$(workingDirectory)/src/$(FunctionName)'
-        VersionNumber: '$(assemblyVersion)'
+        VersionNumber: '$(versionNumber)'
+        Field : 'version'
         Injectversion: true
-        VersionRegex: '\d+\.\d+\.\d+'
         FilenamePattern: '.csproj'
         OutputVersion: 'OutputedVersion'
-        InformationalVersion: '$(versionNumber)'
-
+  
     - task: DotNetCoreCLI@2
       displayName: 'Restore'
       inputs:
@@ -73,9 +70,8 @@ stages:
       inputs:
         command: pack
         packagesToPack: '$(workingDirectory)/src/$(FunctionName)/*.csproj'
-        arguments: '--configuration Release /p:PackageVersion=$(versionNumber)'
-
-    
+        arguments: '--configuration Release'
+  
     - task: PowerShell@2
       displayName: Running NuGetKeyVaultSign
       inputs:
