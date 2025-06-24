@@ -2,7 +2,7 @@
 # Build a .NET Core function app and deploy it to Azure as a Windows function App.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/dotnet-core
-trigger: master
+trigger: refs/heads/master
 
 name: Securibox.CloudAgents-main
 
