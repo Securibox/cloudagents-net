@@ -3,7 +3,13 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/languages/dotnet-core
 trigger:
-  - staging
+  branches:
+    include:
+      - staging
+pr:
+  branches:
+    exclude:
+      - '*'       # Do not trigger on PRs
 
 name: Securibox.CloudAgents-stg
 
@@ -16,7 +22,7 @@ variables:
   - name: functionName
     value: 'Securibox.CloudAgents'
   - name: version.MajorMinor
-    value: '0.2' # Manually adjust the version number as needed for semantic versioning. Patch is auto-incremented.
+    value: '1.0' # Manually adjust the version number as needed for semantic versioning. Patch is auto-incremented.
   - name: version.Patch
     value: $[counter(variables['version.MajorMinor'], 1)]
   - name: versionNumber
