@@ -23,7 +23,7 @@ variables:
   - name: functionName
     value: 'Securibox.CloudAgents'
   - name: versionNumber
-    value: '0.0.20-beta'
+    value: '0.0.21-beta'
   - name: publishFeedCredentials
     value: 'Securibox.CloudAgents.Nuget'
   
